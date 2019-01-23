@@ -1,7 +1,5 @@
 # AWS Certified Solutions Architect - Associate
-Study guide.
-
-[AWS Certified Solutions Architect - Associate](https://aws.amazon.com/certification/certified-solutions-architect-associate/)
+Study guide for [AWS Certified Solutions Architect - Associate](https://aws.amazon.com/certification/certified-solutions-architect-associate/).
 
 ## Table of Contents
 
