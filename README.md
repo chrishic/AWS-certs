@@ -6,10 +6,12 @@ Study guides, notes, tips and tricks for the AWS certification exams I've taken.
 <!-- MarkdownTOC depth=4 -->
 
 - Associate Level Certifications
-    - [Solutions Architect - Associate](./associate/solutions-architect/README.md)
-    - [Developer - Associate](./associate/developer/README.md)
-    - [SysOps Administrator - Associate](./associate/sysops-administrator/README.md)
+    - [Solutions Architect - Associate](./associate/solutions-architect/)
+    - [Developer - Associate](./associate/developer/)
+    - [SysOps Administrator - Associate](./associate/sysops-administrator/)
 - Professional Level Certifications
-    - [Solutions Architect - Professional](./professional/solutions-architect/README.md)
+    - [Solutions Architect - Professional](./professional/solutions-architect/)
+- Deep dives
+	- [Well Architected Framework](./deep-dives/well-architected-framework/)
 
 <!-- /MarkdownTOC -->
