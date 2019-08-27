@@ -22,7 +22,7 @@ Study guide for [AWS Certified Solutions Architect - Associate](https://aws.amaz
   1. Review the [Exam Guide](https://d1.awsstatic.com/training-and-certification/docs-sa-assoc/AWS_Certified_Solutions_Architect_Associate-Exam_Guide_EN_1.8.pdf) and [Sample Questions](https://d1.awsstatic.com/training-and-certification/docs/AWS_Certified_Solutions_Architect_Associate_Sample_Questions.pdf)
   2. [Cloud Guru preparation course](https://acloud.guru/learn/aws-certified-solutions-architect-associate)
   3. [Linux Academy preparation course](https://linuxacademy.com/course/aws-certified-solutions-architect-2019-associate-level/)
-  4. Review the [Well Architected Framework deep dive](../deep-dives/well-architected-framework/)
+  4. Review the [Well Architected Framework deep dive](../../deep-dives/well-architected-framework/)
   5. Review [whitepapers](#whitepapers)
   6. Review [FAQs](#faqs)
 
