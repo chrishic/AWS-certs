@@ -6,7 +6,7 @@
 
 - [Well Architected Framework](#well-architected-framework)
 - [General Design Principles](#general-design-principles)
-- Pillars
+- [Pillars](#pillars)
 	- [Operational Excellence](./operational-excellence.md)
 	- [Security](./security.md)
 	- [Reliability](./reliability.md)
@@ -28,9 +28,9 @@
 	- provides consistent approach to evaluating systems against cloud best practices
 	- helps advise changes necessary to make specific architecture align with best practices
 * Comprised of 3 components:
-	- Design Principles
+	- General design principles
 	- Pillars
-	- Questions
+	- Evaluation (series of questions & answers) - the "Well Architected Review"
 
 
 ## General Design Principles
@@ -42,6 +42,19 @@
 	- Allow for evolutionary architectures (you are never *stuck* with a particular technology)
 	- Drive architectures using data (allows you to make fact based decisions on how to improve your workload)
 	- Improve through game days
+
+
+## Pillars
+
+### [Operational Excellence](./operational-excellence.md)
+
+### [Security](./security.md)
+
+### [Reliability](./reliability.md)
+
+### [Performance Efficiency](./performance-efficiency.md)
+
+### [Cost Optimization](./cost-optimization.md)
 
 
 ## The Well Architected Review
