@@ -19,10 +19,12 @@ Study guide for [AWS Certified Solutions Architect - Associate](https://aws.amaz
 ---
 
 ## Preparation Steps
-  1. Review the Exam Guide and Sample Questions
-  2. [Cloud Guru course](https://acloud.guru/learn/aws-certified-solutions-architect-associate)
-  3. Review [whitepapers](#whitepapers)
-  4. Review [FAQs](#faqs)
+  1. Review the [Exam Guide](https://d1.awsstatic.com/training-and-certification/docs-sa-assoc/AWS_Certified_Solutions_Architect_Associate-Exam_Guide_EN_1.8.pdf) and [Sample Questions](https://d1.awsstatic.com/training-and-certification/docs/AWS_Certified_Solutions_Architect_Associate_Sample_Questions.pdf)
+  2. [Cloud Guru preparation course](https://acloud.guru/learn/aws-certified-solutions-architect-associate)
+  3. [Linux Academy preparation course](https://linuxacademy.com/course/aws-certified-solutions-architect-2019-associate-level/)
+  4. Review the [Well Architected Framework deep dive](../deep-dives/well-architected-framework/)
+  5. Review [whitepapers](#whitepapers)
+  6. Review [FAQs](#faqs)
 
 
 ## Areas to Focus On
@@ -80,7 +82,6 @@ With Spot instances, you will never be charged more than the maximum price you s
   1. "Architecting for the Cloud: AWS Best Practices"
   2. "AWS Security Best Practices"
   3. "Amazon Web Services: Overview of Security Processes"
-  4. "AWS Well-Architected Framework"
   5. "Development and Test on AWS"
   6. "Backup and Recovery Approaches Using AWS"
   7. "Amazon Virtual Private Cloud Connectivity Options"
