@@ -5,6 +5,7 @@ Study guide for [AWS Certified Solutions Architect - Associate](https://aws.amaz
 
 <!-- MarkdownTOC depth=4 -->
 
+- [Content Outline](./content-outline.md)
 - [Preparation Steps](#preparation-steps)
 - [Areas to Focus On](#areas-to-focus-on)
 - [Tricky Areas from Actual Test](#tricky-areas-from-actual-test)
