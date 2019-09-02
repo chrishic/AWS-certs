@@ -1,5 +1,6 @@
 # To Do
 
+
 ## Action Items
 
 * VPC peering
@@ -9,9 +10,28 @@
 * Storage Gateway
 	- Gateway Stored vs Gateway Cached
 * Techniques to allow mobile users to make calls to DynamoDB
-	- Cognito // Security Token Service // Web Identity Provider
-* CloudHSM
-	- [Improve Your Web Server's Security with SSL/TLS Offload in AWS CloudHSM](https://docs.aws.amazon.com/cloudhsm/latest/userguide/ssl-offload.html)
+	- Cognito // User pools vs identity pools // Security Token Service // Web Identity Provider
 * CloudFormation
 * Design a hybrid architecture using key AWS technologies (e.g., VPN, AWS Direct Connect)
 * Architect a continuous integration and deployment process
+
+
+## Items to Research
+
+* CloudTrail 
+	- log file integrity validation
+* Elastic Beanstalk
+	- Deployment types (immutable, rolling)
+	- Does *not* support deleting application bundles after deploy
+* CloudFront
+	- CloudFront Trusted Signer
+	- CloudFront-signed URL
+* CloudFormation
+	- Mappings
+	- Conditions
+* Code*
+	- CodeCommit
+	- CodeBuild
+	- CodePipeline
+	- CodeDeploy
+
