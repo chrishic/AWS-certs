@@ -1,6 +1,7 @@
 # AWS Certified Solutions Architect - Professional
 Study guide for [AWS Certified Solutions Architect - Professional](https://aws.amazon.com/certification/certified-solutions-architect-professional/).
 
+
 ## Table of Contents
 
 <!-- MarkdownTOC depth=4 -->
@@ -8,9 +9,11 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 - [Content Outline](./content-outline.md)
 - [Preparation Steps](#preparation-steps)
 - [General Strategies](#general-strategies)
+- [Important Concepts](#important-concepts)
 - [Domains](#domains)
 	- [Design for Organizational Complexity](#design-for-organizational-complexity)
 	- [Design for New Solutions](#design-for-new-solutions)
+- [Test Preparation Services](#test-preparation-services)
 - [Whitepapers](#whitepapers)
 - [re:Invent Videos](#reinvent-videos)
 - [Other Resources](#other-resources)
@@ -23,12 +26,14 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 ## Preparation Steps
   1. Review the [Exam Guide](https://d1.awsstatic.com/training-and-certification/docs-sa-pro/AWS_Certified_Solutions_Architect_Professional-Exam_Guide_EN_1.2.pdf) and [Sample Questions](https://d1.awsstatic.com/Train%20%26%20Cert/docs/AWS_certified_solutions_architect_professional_examsample.pdf)
   2. [AWS Training course - Exam Readiness: AWS Certified Solutions Architect – Professional](https://www.aws.training/Details/eLearning?id=34737)
-  3. [Cloud Guru preparation course](https://acloud.guru/learn/aws-certified-solutions-architect-professional-2019)
+  3. [A Cloud Guru preparation course](https://acloud.guru/learn/aws-certified-solutions-architect-professional-2019)
   4. [Linux Academy preparation course](https://linuxacademy.com/course/aws-certified-solutions-architect-professional-2018/)
   5. Review the [Well Architected Framework deep dive](../../deep-dives/well-architected-framework/)
   6. Review the [AWS Encryption deep dive](../../deep-dives/encryption/)
   7. Review [whitepapers](#whitepapers)
   8. Review FAQs
+  9. Take the "AWS Certified Solutions Architect – Professional" practice exam
+  	- If you get a passing score, you are ready for the actual exam
 
 
 ## General Strategies
@@ -43,6 +48,20 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 * Pay attention to qualifying clauses
 	- e.g. "most cost effective" or "will best fulfill"
 * Eliminate obviously wrong answers to narrow the selection of possible right answers.
+
+
+## Important Concepts
+
+* Disaster recovery
+	- Understand RTO, RPO
+	- Understand the difference between each type and what each offers with respect to RTO/RPO
+		- Pilot light
+		- Warm standby esp. pilot light, warm standby w.r.t RTO and RPO)
+* Cloud migration
+	- Make sure you understand the difference between:
+		- re-host
+		- re-platform
+		- re-architect
 
 
 ## Domains
@@ -189,13 +208,26 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 	- Route53
 
 
+## Test Preparation Services]
+* A Cloud Guru
+	- $29/month
+	- [AWS Certified Solutions Architect – Professional](https://acloud.guru/learn/aws-certified-solutions-architect-professional-2019)
+* Linux Academy
+	- $49/month
+	- [AWS Certified Solutions Architect – Professional](https://linuxacademy.com/course/aws-certified-solutions-architect-professional-2018/)
+* Whizlabs
+	- Practice exams, 400 questions, $30
+	- [AWS Certified Solutions Architect Professional](https://www.whizlabs.com/aws-solutions-architect-professional/)
+
+
 ## Whitepapers
-* [AWS Security Best Practices whitepaper, August 2016](https://d1.awsstatic.com/whitepapers/Security/AWS_Security_Best_Practices.pdf)
-* [Architecting for the Cloud AWS Best Practices whitepaper, February 2016](https://aws.amazon.com/whitepapers/architecting-for-the-aws-cloud-best-practices/)
-* [Microservices on AWS](https://docs.aws.amazon.com/whitepapers/latest/microservices-on-aws/introduction.html)
+* [Architecting for the Cloud - AWS Best Practices, October 2018](https://d1.awsstatic.com/whitepapers/AWS_Cloud_Best_Practices.pdf)
 * [Amazon Web Services: Overview of Security Processes whitepaper, May 2017](https://d1.awsstatic.com/whitepapers/aws-security-whitepaper.pdf)
-* Practicing Continuous Integration and Continuous Delivery on AWS Accelerating Software Delivery with DevOps whitepaper, June 2017
-* Using Amazon Web Services for Disaster Recovery whitepaper, October 2014
+* [AWS Security Best Practices whitepaper, August 2016](https://d1.awsstatic.com/whitepapers/Security/AWS_Security_Best_Practices.pdf)
+* [Microservices on AWS](https://docs.aws.amazon.com/whitepapers/latest/microservices-on-aws/introduction.html)
+* [Using Amazon Web Services for Disaster Recovery, October 2014](https://d1.awsstatic.com/whitepapers/aws-disaster-recovery.pdf)
+* [An Overview of AWS Cloud Data Migration Services, May 2016](https://d1.awsstatic.com/whitepapers/Storage/An_Overview_of_AWS_Cloud_Data_Migration_Services.pdf)
+* [Practicing Continuous Integration and Continuous Delivery on AWS, June 2017](https://d1.awsstatic.com/whitepapers/DevOps/practicing-continuous-integration-continuous-delivery-on-AWS.pdf)
 
 
 ## re:Invent Videos
@@ -206,3 +238,6 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 ## Other Resources
 * [AWS Documentation for services](https://docs.aws.amazon.com/index.html)
 * [AWS Architecture Center](https://aws.amazon.com/architecture/)
+* [AWS Solutions](https://aws.amazon.com/solutions/)
+* [Best Practices for Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_BestPractices.html)
+* [Solution Architect Pro - Learning Path](http://jayendrapatil.com/aws-certified-solution-architect-professional-exam-learning-path/)
