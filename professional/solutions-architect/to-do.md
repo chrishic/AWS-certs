@@ -12,8 +12,13 @@
 * Techniques to allow mobile users to make calls to DynamoDB
 	- Cognito // User pools vs identity pools // Security Token Service // Web Identity Provider
 * CloudFormation
+* Revisit S3 lifecycle policies and rules of when you can transition to Glacier
 * Design a hybrid architecture using key AWS technologies (e.g., VPN, AWS Direct Connect)
 * Architect a continuous integration and deployment process
+* Blue/green deployments
+* Understand cache population techniques
+	- Write-through
+	- Lazy loading	
 
 
 ## Items to Research
@@ -34,4 +39,14 @@
 	- CodeBuild
 	- CodePipeline
 	- CodeDeploy
+		- To prevent instances from being terminated during updates (due to failed health checks), CodeDeploy can:
+			- run pre-install tasks to remove an instance from an ELB load balancer
+			- perform install
+			- then reinstate instance to load balancer
+* Migration tools
+	- AWS Application Discovery Service
+	- AWS Database Migration Service
+* Understand how EMR works
+* CloudWatch Events rule
+* Kibana and integration with Elasticsearch
 

@@ -13,8 +13,12 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 - [Domains](#domains)
 	- [Design for Organizational Complexity](#design-for-organizational-complexity)
 	- [Design for New Solutions](#design-for-new-solutions)
+	- [Migration Planning](#migration-planning)
+	- [Cost Control](#cost-control)
+	- [Improving Existing Architectures](#improving-existing-architectures)
 - [Test Preparation Services](#test-preparation-services)
 - [Whitepapers](#whitepapers)
+- [AWS Training Courses](#aws-training-courses)
 - [re:Invent Videos](#reinvent-videos)
 - [Other Resources](#other-resources)
 - [TO DO](./to-do.md)
@@ -25,12 +29,13 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 
 ## Preparation Steps
   1. Review the [Exam Guide](https://d1.awsstatic.com/training-and-certification/docs-sa-pro/AWS_Certified_Solutions_Architect_Professional-Exam_Guide_EN_1.2.pdf) and [Sample Questions](https://d1.awsstatic.com/Train%20%26%20Cert/docs/AWS_certified_solutions_architect_professional_examsample.pdf)
-  2. [AWS Training course - Exam Readiness: AWS Certified Solutions Architect – Professional](https://www.aws.training/Details/eLearning?id=34737)
+  2. Take the [AWS training courses](#aws-training-courses) listed below 
   3. [A Cloud Guru preparation course](https://acloud.guru/learn/aws-certified-solutions-architect-professional-2019)
   4. [Linux Academy preparation course](https://linuxacademy.com/course/aws-certified-solutions-architect-professional-2018/)
   5. Review the [Well Architected Framework deep dive](../../deep-dives/well-architected-framework/)
   6. Review the [AWS Encryption deep dive](../../deep-dives/encryption/)
   7. Review [whitepapers](#whitepapers)
+  	- With "Storage Options in the AWS Cloud, October 2013" whitepaper, pay attention to the "Anti-patterns" sections for each option
   8. Review FAQs
   9. Take the "AWS Certified Solutions Architect – Professional" practice exam
   	- If you get a passing score, you are ready for the actual exam
@@ -56,7 +61,9 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 	- Understand RTO, RPO
 	- Understand the difference between each type and what each offers with respect to RTO/RPO
 		- Pilot light
-		- Warm standby esp. pilot light, warm standby w.r.t RTO and RPO)
+		- Warm standby
+		- Understand what each offers in terms of RTO, RPO
+	- Understand difference between HA and fault tolerant
 * Cloud migration
 	- Make sure you understand the difference between:
 		- re-host
@@ -165,21 +172,25 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 			- Mappings
 			- Conditions
 	- CloudWatch
+		- CloudWatch alarms trigger against a metric threshold
+			- State changes do *not* trigger CloudWatch alarms
+		- CloudWatch Events rules can trigger state changes
 	- Cognito
 		- Fully managed solution providing access control and authentication for web/mobile apps
 		- Features
 			- Supports MFA
 			- Data at-rest and in-transit encryption
 			- Log in via social identity providers
+				- Facebook, Google, AWS
 			- Support for SAML	
 		- Core concepts
 			- User pools
-				- Directory profile for all users
-				- Supports user federation through a third-party IdP
+				- Provides directory profile for all users which you access thru SDK
+				- Supports user federation through 3rd party identity provider
 				- Signed users receive authentication tokens
-				- Tokens can be exchanged for AWS access via Amazon Cognito identity pools
+				- Tokens can be exchanged for AWS access via Cognito identity pools
 			- Identity pools
-				- Auth users with web IdP, including Amazon Cognito user pools
+				- Authenticates users with web identity providers, including Cognito user pools
 				- Assign temporary AWS credentials via STS
 				- Supports anonymous guest users
 * Other important services
@@ -206,9 +217,304 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 		- Origin can be from AWS or on-premise
 		- Access to S3 buckets can be limited to Origin Access Identities (OAI)
 	- Route53
+* Security requirements and controls
+	- IAM Users and Groups
+		- policies and roles
+		- AWS STS
+	- AWS Service Roles
+		- for AWS services interacting with the account
+			- i.e. Lambda needs a service role
+	- Identity providers
+		- SAML 2.0, SSO, OpenID Connect
+		- Cognito, AWS Directory Service
+	- Understand how to assume a role:
+		- cross account
+		- in same account
+	- Security logging
+		- segregated bucket
+		- dedicated account
+* Best practice: security logging
+	- Have a separate AWS account just for "security"
+		- where logs are written to S3 bucket in the "security" account
+		- only give "security" personnel access to security account
+	- Centralize collecting of logs to a dedicated account, if possible
+	- Send all CloudTrail logs to S3 for storage and log retention
+		- Enable CloudTrail log file integrity validation
+	- Enforce least privilege principle
+	- Enforce MFA delete on S3 bucket
 
 
-## Test Preparation Services]
+### Migration Planning
+
+* Focus areas:
+	- Existing workloads and processes for potential migration to the cloud
+	- Migration tools or services for new and migrated solutions based on detailed AWS knowledge
+	- Strategies for migrating existing on-premises workloads to the cloud
+	- New cloud architectures for existing solutions
+* The 6 R's of migration:
+	1. Retain: keep as-is
+	2. Re-host: lift and shift
+	3. Refactor: re-architect
+	4. Re-platform: life and shift with some tinkering
+	5. Replace
+	6. Retire
+* Application migration process
+	- Plan
+		- Discover
+			- Assessment and profiling
+			- Data requirements and classification
+			- Prioritization
+			- Business logic and infrastructure dependencies
+		- Design
+			- Detailed migration plan
+			- Estimate effort
+			- Security and risk assessment
+	- Build
+		- Transform
+			- Network topology
+			- Migrate
+			- Deploy
+			- Validate
+		- Transition
+			- Pilot testing
+			- Transition to support
+			- Release management
+			- Cutover and decommission
+	- Run
+		- Operate
+			- Staff training
+			- Monitoring
+			- Incident management
+			- Provisioning
+		- Optimize
+			- Monitoring-driven optimization
+			- CI/CD
+			- Well Architected framework
+* Migration tools for assistance
+	- AWS Application Discovery Service
+	- AWS Database Migration Service
+* AWS Storage Portfolio
+	- Block
+		- EBS
+		- Ephemeral storage
+	- File
+		- EFS
+	- Object
+		- S3
+		- Glacier
+	- Data transfer
+		- Snowball
+		- Storage Gateway
+		- Direct Connect (DX)
+		- Kinesis
+* Data migration
+	- Consider downtime/orchestration
+		- The more downtime you are allowed, the simpler/cheaper the migration can be
+	- Methods:
+		- image backup/restore
+		- file copy
+		- replication
+* Hybrid cloud architectures and connectivity
+	- Internet
+	- Direct Connect (DX)
+	- VPN	
+
+
+### Cost Control
+
+* Focus areas:
+	- Cost-effective pricing models
+	- Designing and implementing controls to ensure cost optimization
+	- Opportunities to reduce cost in an existing solution
+* Change your way of thinking about resources...
+	- Instead of "paying for what you *think* you need" you should frame solutions around "paying for what you *actually* need"
+* You can only manage what you measure
+	- what to measure
+	- who/what can measure
+	- who/what can see measurements
+* Limit resource provisioning
+* Tag everything!
+	- Categories: name, group, costcenter, use, etc...
+	- Types of tags:
+		- Resource tags
+			- provide ability to organize and search within and across resources
+			- filterable and searchable
+			- do *not* appear in deatiled billing report
+		- Cost allocation tags
+			- map AWS charges to organizational attributes for accounting purposes
+			- information presented in the detailed billing report and Cost Explorer (must be explicitly selected)
+			- only available on certain services or limited to components within a service
+				- e.g. can be specified at S3 bucket level, but not at S3 object level
+* Best practices:
+	- Only allow specific groups/teams to deploy chosen AWS resources
+	- Create policies for each environment
+	- Require tags in order to instantiate resources
+	- Monitor and send alerts or shut down instances that are improperly tagged
+	- Use CloudWatch to send alerts when billing thresholds are met
+	- Analyze spend using AWS or partner tools
+
+
+### Improving Existing Architectures
+
+* 5.1. Troubleshoot solution architectures
+	- S3 Server Access Logs
+		- contains details about data requests, such as:
+			- request type
+			- resources requested
+			- timestamp of request
+	- ELB Access Logs
+		- information about each request made to ELB, including:
+			- client IP
+			- latencies
+			- server response
+	- CloudTrail
+		- provides history of API calls to your account
+	- VPC Flow Logs
+		- capture information about IP traffic going into or out of your network interfaces and subnets
+	- CloudWatch Logs
+		- monitor, store, and access applications and systems using log data from EC2 instances and on-prem servers
+			- *NOTE* you can import logs from on-prem servers into CloudWatch for viewing/analysis
+	- AWS Config
+		- provide an inventory of AWS resources and records changes to the configuration of those resources
+* 5.2. Improve an existing solution for operational excellence
+	- See: "Operational Excellence" pillar of Well Architected framework
+	- Understand business and customer needs
+	- Make frequent, small and reversible changes
+		- You want "two-way doors", *not* one-way doors
+	- Create and use procedures to respond to operational events
+	- Continuously improve supporting processes and procedures
+	- Key tools:
+		- Trusted Advisor
+			- define operational priorities
+			- looks at ~50 key operational elements
+		- CloudFormation
+			- design for operations
+		- Systems Manager
+			- operational readiness
+* 5.3. Improve the reliability of an existing solution
+	- Operational continuum
+		- High Availability spectrum
+			- Manual recovery -> High availability -> Fault tolerant
+		- Disaster Recovery spectrum
+			- Backup/recover -> Pilot light -> Warm standby -> Multi-site
+	- Architect for AZ failure
+		- Use multi-AZ services
+			- e.g. S3, DynamoDB
+		- Plan for capacity constraints
+		- Use Reserved Instances for critical systems
+		- Identify all AZ-specific services, noting which are regional/global
+		- Use EBS snapshots to help minimize the RPO
+* 5.4. Improve the performance of an existing solution
+	- Ways of improving performance
+		- Shorten response times
+		- Increase throughput
+		- Lower the utilization of resources (efficiency)
+		- Increase scalability for workloads that burst
+	- Tools to use to increase performance:
+		- S3
+			- Move static content to S3
+			- Use IA for infrequently accessed data
+			- Larger objects reduce PUT/GET requests
+		- EBS
+			- GP2 for system disks
+			- SC1 for cold storage
+			- PIOPS for high performance random I/O
+			- ST1 for high performance sequential I/O
+		- RDS
+			- Scale up instance size
+			- Increase storage size online
+			- Employ caching layers
+			- RDS read replicas
+				- async
+				- apps must be updated to use replica endpoints
+				- cross-region option (for some RDS flavors)
+		- ElastiCache
+			- Be aware of cache timeouts/TTLs
+			- Redis replication groups for HA
+			- Employ write-through cache for write spikes
+		- DynamoDB
+			- Alter read/write capacity units
+			- Use global or local secondary indexes
+			- Use SQS for write spikes
+			- Write data in quiet periods
+		- Loosely coupled architecture
+			- ELB, SQS, SNS, Kinesis, Auto Scaling
+* 5.5. Improve the security of an existing solution
+	- Restrict access to resources
+		- IAM
+			- User-based policies
+			- Resource-based policies
+			- Policy conditions
+	- Data encryption at rest
+		- S3
+			- SSE-C, SSE-KMS, SSE-S3
+		- EBS
+			- KMS
+		- DynamoDB
+			- Encryption client, SSE-KMS
+		- RDS
+			- KMS, TDE (transparent data encryption)
+		- Redshift
+			- KMS, CloudHSM
+		- SQS/SNS
+			- KMS
+	- Protect data in-transit
+		- SSL termination at the load balancer
+			- Certificates are stored in IAM
+			- Single certificate per load balancer
+			- Offload decryption work to load balancer
+			- Re-encryption between load balancer and instances
+			- ALB vs classic load balancer
+		- SSL termination in CloudFront
+			- Using both SNI or non-SNI certificates
+			- SSL connections to ELB
+	- Improve network protection
+		- Network perimeter controls
+			- Security groups
+				- Per-ENI granularity
+				- Stateful
+				- Inter-service communication
+			- Network ACLs
+				- Subnet boundaries only
+				- ALLOW and DENY rules
+				- IP ranges only
+			- Host firewalls
+				- Central or distributed control
+				- IDS, IPS
+* 5.6. Improve the deployment of an existing solution
+	- CloudFormation
+		- Setup, Configure
+			- Stack
+			- AWS::CloudFormation::Init
+			- CreationPolicy/WaitCondition
+		- Deploy
+			- UserData
+			- Stack updates
+			- Update change sets
+		- Undeploy, Shutdown
+			- Delete stack
+			- Consider DeletionPolicy attribute
+	- CodeDeploy
+		- Deploy
+			- Applications and revisions
+			- Deployment groups
+			- Lifecycle hooks
+	- BeanStalk
+		- Setup, Configure
+			- EC2, Auto Scaling, ELB
+			- .ebextensions: configuration/customization
+			- leader_only: single operation updates
+		- Deploy
+			- multiple app versions
+			- deployment to the fleet
+			- CNAME swaps/zero downtime
+		- Undeploy, Shutdown
+			- remove an environment
+	- OpsWorks
+		- Hosted Chef
+
+
+## Test Preparation Services
 * A Cloud Guru
 	- $29/month
 	- [AWS Certified Solutions Architect – Professional](https://acloud.guru/learn/aws-certified-solutions-architect-professional-2019)
@@ -222,12 +528,23 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 
 ## Whitepapers
 * [Architecting for the Cloud - AWS Best Practices, October 2018](https://d1.awsstatic.com/whitepapers/AWS_Cloud_Best_Practices.pdf)
-* [Amazon Web Services: Overview of Security Processes whitepaper, May 2017](https://d1.awsstatic.com/whitepapers/aws-security-whitepaper.pdf)
+* [Amazon Web Services: Overview of Security Processes whitepaper, May 2017](https://d1.awsstatic.com/whitepapers/Security/AWS_Security_Whitepaper.pdf)
 * [AWS Security Best Practices whitepaper, August 2016](https://d1.awsstatic.com/whitepapers/Security/AWS_Security_Best_Practices.pdf)
 * [Microservices on AWS](https://docs.aws.amazon.com/whitepapers/latest/microservices-on-aws/introduction.html)
 * [Using Amazon Web Services for Disaster Recovery, October 2014](https://d1.awsstatic.com/whitepapers/aws-disaster-recovery.pdf)
 * [An Overview of AWS Cloud Data Migration Services, May 2016](https://d1.awsstatic.com/whitepapers/Storage/An_Overview_of_AWS_Cloud_Data_Migration_Services.pdf)
+* [Storage Options in the AWS Cloud, October 2013](https://d1.awsstatic.com/whitepapers/Storage/aws-storage-options.pdf)
+	- Pay attention to the "Anti-patterns" sections for each option
 * [Practicing Continuous Integration and Continuous Delivery on AWS, June 2017](https://d1.awsstatic.com/whitepapers/DevOps/practicing-continuous-integration-continuous-delivery-on-AWS.pdf)
+
+
+## AWS Training Courses
+* [Exam Readiness: AWS Certified Solutions Architect – Professional](https://www.aws.training/Details/eLearning?id=34737)
+* [Migrating and Tiering Storage to AWS](https://www.aws.training/Details/eLearning?id=16368)
+* [Deep Dive into Amazon Glacier](https://www.aws.training/Details/Curriculum?id=19093)
+* [Deep Dive into Amazon Elastic Block Store - EBS](https://www.aws.training/Details/Curriculum?id=26940)
+* [Deep Dive into AWS Storage Gateway](https://www.aws.training/Details/Curriculum?id=19403)
+* [Deep Dive into Amazon Simple Storage Service - Amazon S3](https://www.aws.training/Details/Curriculum?id=26930)
 
 
 ## re:Invent Videos
@@ -236,6 +553,7 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 
 
 ## Other Resources
+* [Self Paced Labs](http://aws.amazon.com/training/self-paced-labs)
 * [AWS Documentation for services](https://docs.aws.amazon.com/index.html)
 * [AWS Architecture Center](https://aws.amazon.com/architecture/)
 * [AWS Solutions](https://aws.amazon.com/solutions/)
