@@ -291,8 +291,26 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 			- CI/CD
 			- Well Architected framework
 * Migration tools for assistance
-	- AWS Application Discovery Service
-	- AWS Database Migration Service
+	- Migration Hub:
+		- Application Discovery Service
+		- Database Migration Service
+		- Server Migration Service
+			- automates migration of your on-premises VM servers
+				- VMware vSphere
+					- Requires vCenter
+				- Microsoft Hyper-V/SCVMM
+				- Azure VMs
+			- SMS incrementally replicates your server VMs as AMIs ready for deployment on Amazon EC2
+			- Getting started:
+				- You need to install the Server Migration Connector to your on-prem environment
+					- the connector is what copies VM snapshots from on-prem to AWS cloud
+	- [AWS Management Portal for vCenter Server](https://aws.amazon.com/ec2/vcenter-portal/)
+		- Portal installs as a vCenter Server plug-in within your existing vCenter Server environment
+		- It enables you to migrate VMware VMs to Amazon EC2 and manage AWS resources from within vCenter Server
+		- IMPORTANT:  AWS recommends using AWS Server Migration Service to migrate VMs from a vCenter environment
+			- SMS automates the migration by replicating on-premises VMs incrementally and converting them to AMIs
+			- You can continue using your on-premises VMs while migration is in progress
+			- You should only use AWS Management Portal for vCenter Server if you want to manage EC2 resources from within vSphere Client
 * AWS Storage Portfolio
 	- Block
 		- EBS
@@ -352,6 +370,9 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 	- Monitor and send alerts or shut down instances that are improperly tagged
 	- Use CloudWatch to send alerts when billing thresholds are met
 	- Analyze spend using AWS or partner tools
+		- Cost Explorer
+		- Cost and Utilization Report
+		- QuickSight integration for visualizing reports
 
 
 ### Improving Existing Architectures
@@ -386,7 +407,12 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 	- Key tools:
 		- Trusted Advisor
 			- define operational priorities
-			- looks at ~50 key operational elements
+			- looks at ~50 key operational elements spread over the following categories:
+				- Cost optimization
+				- Performance
+				- Security
+				- Fault tolerance
+				- Service limits
 		- CloudFormation
 			- design for operations
 		- Systems Manager
@@ -550,6 +576,7 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 ## re:Invent Videos
 * [AWS re:Invent 2016: Amazon Global Network Overview with James Hamilton](https://www.youtube.com/watch?v=uj7Ting6Ckk)
 * [AWS re:Invent 2017: Networking Many VPCs: Transit and Shared Architectures (NET404)](https://www.youtube.com/watch?v=KGKrVO9xlqI)
+* [AWS re:Invent 2015: A Technical Introduction to Amazon EMR](https://youtu.be/WnFYoiRqEHw)
 
 
 ## Other Resources
