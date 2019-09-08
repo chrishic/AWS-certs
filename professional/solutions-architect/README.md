@@ -576,8 +576,10 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 ## re:Invent Videos
 * [AWS re:Invent 2016: Amazon Global Network Overview with James Hamilton](https://www.youtube.com/watch?v=uj7Ting6Ckk)
 * [AWS re:Invent 2017: Networking Many VPCs: Transit and Shared Architectures (NET404)](https://www.youtube.com/watch?v=KGKrVO9xlqI)
+* [AWS re:Invent 2017: Deep Dive: AWS Direct Connect and VPNs](https://youtu.be/eNxPhHTN8gY)
+* [AWS re:Invent 2017: Deep Dive on AWS CloudFormation](https://youtu.be/01hy48R9Kr8)
+* [AWS re:Invent 2018: Aurora Serverless: Scalable, Cost-Effective Application Deployment](https://www.youtube.com/watch?v=4DqNk7ZTYjA)
 * [AWS re:Invent 2015: A Technical Introduction to Amazon EMR](https://youtu.be/WnFYoiRqEHw)
-
 
 ## Other Resources
 * [Self Paced Labs](http://aws.amazon.com/training/self-paced-labs)
@@ -585,4 +587,5 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 * [AWS Architecture Center](https://aws.amazon.com/architecture/)
 * [AWS Solutions](https://aws.amazon.com/solutions/)
 * [Best Practices for Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_BestPractices.html)
+* [Managed PostgreSQL Databases on AWS](https://youtu.be/hdQ-geGBsq4)
 * [Solution Architect Pro - Learning Path](http://jayendrapatil.com/aws-certified-solution-architect-professional-exam-learning-path/)

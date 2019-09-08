@@ -11,7 +11,6 @@
 			- Can you transition from S3 standard to S3 IA after one day? Or is there a minimum of 30 days before transition?
 		- Batch S3 calls to reduce costs
 	- Storage Gateway
-		- Gateway Stored vs Gateway Cached
 	- Systems Manager
 		- SSM agent installation
 		- Tools:
@@ -25,6 +24,7 @@
 		- Conditions
 		- How do you test change sets in CloudFormation?
 	- VPC
+		- VPC endpoints
 		- Setup VPN between on-premises machines and AWS VPC
 		- VPC peering
 			- To have different VPCs talk with each other, do you just create the peering and then update the route tables on both VPCs?
