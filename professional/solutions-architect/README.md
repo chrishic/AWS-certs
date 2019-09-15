@@ -32,12 +32,14 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
   2. Take the [AWS training courses](#aws-training-courses) listed below 
   3. [A Cloud Guru preparation course](https://acloud.guru/learn/aws-certified-solutions-architect-professional-2019)
   4. [Linux Academy preparation course](https://linuxacademy.com/course/aws-certified-solutions-architect-professional-2018/)
-  5. Review the [Well Architected Framework deep dive](../../deep-dives/well-architected-framework/)
-  6. Review the [AWS Encryption deep dive](../../deep-dives/encryption/)
-  7. Review [whitepapers](#whitepapers)
+  5. Review the following deep dives
+  	- [Well Architected Framework deep dive](../../deep-dives/well-architected-framework/)
+  	- [AWS Encryption deep dive](../../deep-dives/encryption/)
+  	- [Amazon Simple Storage Service (S3) Deep Dive](../../deep-dives/s3/)
+  6. Review [whitepapers](#whitepapers)
   	- With "Storage Options in the AWS Cloud, October 2013" whitepaper, pay attention to the "Anti-patterns" sections for each option
-  8. Review FAQs
-  9. Take the "AWS Certified Solutions Architect – Professional" practice exam
+  7. Review FAQs
+  8. Take the "AWS Certified Solutions Architect – Professional" practice exam
   	- If you get a passing score, you are ready for the actual exam
 
 
