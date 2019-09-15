@@ -4,67 +4,88 @@
 
 <!-- MarkdownTOC depth=4 -->
 
-- [Security and Encryption](#security-and-encryption)
+- [Accessing Storage](./accessing-storage.md)
+- [Managing Storage](./managing-storage.md)
+- [Lifecycle Policies](./lifecycle-policies.md)
+- [Security](./s3-security.md)
+- [Encryption](./s3-encryption.md)
+- [Optimization](./s3-optimization.md)
+- [Security Tools and Services](./security-tools-services.md)
+- [Monitoring and Analyzing S3 Data](#monitoring-and-analyzing-s3-data)
 - [Presigned URLs](#presigned-urls)
-- [CloudFront](#cloudfront)
+- [CORS](#cors)
 - [Snowball](#snowball)
-- [Links](#links)
+- [S3 Batch Operations](#s3-batch-operations)
 
 <!-- /MarkdownTOC -->
 
 ---
 
+## Monitoring and Analyzing S3 Data
 
-## Security and Encryption
-
-* You can secure buckets via either:
-	1. Bucket policies
-	2. Access Control Lists (ACLs)
-* Two types of encryption:
-	1. In transit (SSL/TLS)
-	2. At rest
-		- server side encryption
-	  		- S3 managed keys - SSE-S3
-	  		- KMS encrypted - SSE-KMS (provides audit trail)
-	  		- customer provided keys - SSE-C
-	 	- client side encryption
-* Enforce encryption by default for S3 bucket:
-    - any object placed in this bucket must be encrypted with a specific key
-    - works with S3-managed (SSE-S3) or KMS master keys (SSE-KMS)
-    - ensures encryption if the client calling S3 PUT command forgets to set encryption as header parameter
-        - if your PUT request headers don't include encryption information, Amazon S3 uses the bucket’s default encryption settings to encrypt the objects
-    - See: [Amazon S3 Default Encryption for S3 Buckets](https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html)
+* Storage Class Analysis
+	- Identify hot data (frequently-accessed) vs warm/cold data (infrequently-accessed)
+	- Delivers daily report of S3 data access patterns to help visualize hot, warm and cold data
+	- Offers guidance on how to tune lifecycle policies to save $$$
+		- Recommendations of when to transition data occurs 30 days after Storage Class analysis has been enabled
+	- Can drill deep by bucket, prefix or object tag
+	- Can export data to S3 bucket for analysis with other BI tools
+* QuickSight
+	- Allows you to easily analyze and visualize S3 Storage Class analytics data
+		- Gain insights into usage and growth patterns
+	- Integrated with S3
+		- No need for manual exports or data preparation
+		- Can setup a daily refresh of storage class analytic data
+	- You can publish/share visualizations as a dashboard
+* CloudWatch Metrics
+	- Two types of metrics
+		- Storage metrics
+			- Reported once per day at no additional cost
+				- `BucketSizeBytes`
+					- You can see amount of data storage per each storage class, along with per-class overhead metrics
+				- `NumberOfObjects`
+			- When you transition S3 objects to Glacier, each object uses 8KB of STANDARD storage for metadata about the object
+				- Reported in CloudWatch metric reports as `GlacierS3ObjectOverhead`
+			- When you have objects less than 128KB in IA storage, get charged for full 128KB of storage
+				- Difference between two is reported in CloudWatch metric reports at `OneZoneIASizeOverhead`
+		- Request metrics
+			- Must be enabled
+			- Available in 1 minute intervals and incur additional cost
+				- Examples:
+					- `AllRequests`, `PutRequests`, `GetRequests`, `BytesDownloaded`, etc.
 
 
 ## Presigned URLs
-TBD.
+
+* Presigned URLs: PUT
+	- Allow for restricted access, but not require users to have AWS credentials
+	- When you create the presigned URL, you provide:
+		- Your security credentials
+			- the creator of the presigned URL must have permissions to access the object
+		- Bucket name
+		- Object key
+		- HTTP method (PUT, GET)
+		- Expiration date and time
+* Presigned URLs: GET
+	- Allow anyone with URL to retrieve objects from bucket
 
 
-## CloudFront
+## CORS
 
-* Creating a CDN
-	1. Create a S3 bucket to host your website content - make sure to make it public
-	2. Go to Cloudfront - click "Create Distribution" - Select "Web Distribution"
-		- specify S3 bucket as origin
-		- restrict bucket access
-		- Origin Access Identity
-		- Restrict viewer access via signed URLs or signed cookies
-		- Use pre-signed URLs to lock down CloudFront or S3 content
-* CloudFront allows for "geo-restrictions" 
-	- you can whitelist and blacklist
-* You can invalidate objects at edge locations manually, but you are charged for it
-* To delete a distribution:
-	1. First disable it
-	2. Then delete it
+* Cross-Origin Resource Sharing (CORS)
+	- You can selectively allow cross-origin access to your S3 resources
+	- To enable CORS:
+		- Create a CORS configuration XML file with rules to identify the origins that are allowed to access your bucket
 
 
 ## Snowball
+
 * Used to be known as Import/Export
 * Previously customers could send in their own storage devices
 	- Now AWS provides the storage appliance themselves
 * Snowball can:
-	- import to S3
-	- export from S3
+	- Import to S3
+	- Export from S3
 * Three flavors:
 	1. Snowball 
 		- storage only 
@@ -77,6 +98,19 @@ TBD.
 		- semi-truck of storage capacity
 
 
-## Links
-* [S3: Protecting Data Using Server-Side Encryption](https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html)
-* [Amazon S3 Default Encryption for S3 Buckets](https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html)
+## S3 Batch Operations
+
+* Requires a list of S3 objects to be processed in the batch job
+	- List is either Inventory Report or CSV file
+* Actions for batch operations:
+	- PUT copy
+	- Invoke Lambda
+	- Replace all tags
+	- Replace ACL
+	- Restore (from Glacier)
+* Requires IAM role that gives S3 permission to:
+	- read the objects in the manifest
+	- perform desired actions
+	- write optional completion report
+	- ALSO: if using Lambda, Execution Role for the function must trust S3 Batch Operations
+* See: [New – Amazon S3 Batch Operations](https://aws.amazon.com/blogs/aws/new-amazon-s3-batch-operations/)
