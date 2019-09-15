@@ -14,5 +14,6 @@ Study guides, notes, tips and tricks for the AWS certification exams I've taken.
 - Deep dives
 	- [Well Architected Framework](./deep-dives/well-architected-framework/)
 	- [AWS Encryption Deep Dive](./deep-dives/encryption/)
+	- [Amazon Simple Storage Service (S3) Deep Dive](./deep-dives/s3/)
 
 <!-- /MarkdownTOC -->
