@@ -311,6 +311,9 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 			- SMS automates the migration by replicating on-premises VMs incrementally and converting them to AMIs
 			- You can continue using your on-premises VMs while migration is in progress
 			- You should only use AWS Management Portal for vCenter Server if you want to manage EC2 resources from within vSphere Client
+	- VMWare Cloud on AWS
+		- [VMware Cloud on AWS](https://cloud.vmware.com/vmc-aws)
+		- [VMware Cloud on AWS - Overview](https://youtu.be/wibLL71pOBk)
 * AWS Storage Portfolio
 	- Block
 		- EBS
@@ -566,11 +569,11 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 
 ## AWS Training Courses
 * [Exam Readiness: AWS Certified Solutions Architect – Professional](https://www.aws.training/Details/eLearning?id=34737)
-* [Migrating and Tiering Storage to AWS](https://www.aws.training/Details/eLearning?id=16368)
-* [Deep Dive into Amazon Glacier](https://www.aws.training/Details/Curriculum?id=19093)
-* [Deep Dive into Amazon Elastic Block Store - EBS](https://www.aws.training/Details/Curriculum?id=26940)
-* [Deep Dive into AWS Storage Gateway](https://www.aws.training/Details/Curriculum?id=19403)
 * [Deep Dive into Amazon Simple Storage Service - Amazon S3](https://www.aws.training/Details/Curriculum?id=26930)
+* [Deep Dive into Amazon Glacier](https://www.aws.training/Details/Curriculum?id=19093)
+* [Deep Dive into AWS Storage Gateway](https://www.aws.training/Details/Curriculum?id=19403)
+* [Migrating and Tiering Storage to AWS](https://www.aws.training/Details/eLearning?id=16368)
+* [Deep Dive into Amazon Elastic Block Store - EBS](https://www.aws.training/Details/Curriculum?id=26940)
 
 
 ## re:Invent Videos
@@ -586,6 +589,7 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 * [AWS Documentation for services](https://docs.aws.amazon.com/index.html)
 * [AWS Architecture Center](https://aws.amazon.com/architecture/)
 * [AWS Solutions](https://aws.amazon.com/solutions/)
+* [On-Demand AWS Tech Talks](https://aws.amazon.com/about-aws/events/monthlywebinarseries/on-demand/)
 * [Best Practices for Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_BestPractices.html)
 * [Managed PostgreSQL Databases on AWS](https://youtu.be/hdQ-geGBsq4)
 * [Solution Architect Pro - Learning Path](http://jayendrapatil.com/aws-certified-solution-architect-professional-exam-learning-path/)

@@ -6,11 +6,6 @@
 * Create study guides for the following AWS services:
 	- CloudWatch
 		- CloudWatch Events rule
-	- S3
-		- Revisit S3 lifecycle policies and rules of when you can transition to Glacier
-			- Can you transition from S3 standard to S3 IA after one day? Or is there a minimum of 30 days before transition?
-		- Batch S3 calls to reduce costs
-	- Storage Gateway
 	- Systems Manager
 		- SSM agent installation
 		- Tools:
@@ -37,6 +32,18 @@
 	- Route 53
 		- routing options, in particular:
 			- failover routing
+	- ElastiCache
+		- ElastiCache for Redis at-rest encryption
+			- optional feature that encryptson-disk data
+			- when enabled on a replication group, it encrypts the following aspects:
+				- Disk during sync, backup and swap operations
+				- Backups stored in Amazon S3
+			- By default, uses service managed encryption at rest (e.g. SSE-Redis)
+			- You can also use your own CMKs (e.g. SSE-KMS)
+		- Links:
+			* [At-Rest Encryption in ElastiCache for Redis](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/at-rest-encryption.html)
+			* [Amazon ElastiCache for Redis adds support for customer managed keys in AWS Key Management Service for encryption at rest](https://aws.amazon.com/about-aws/whats-new/2019/08/amazon-elasticache-for-redis-adds-support-for-customer-managed-keys-in-aws-key-management-service-for-encryption-at-rest/)
+			* [ElastiCache for Redis In-Transit Encryption - TLS](https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/in-transit-encryption.html)
 * Play around with Secrets Manager
 * Techniques to allow mobile users to make calls to DynamoDB
 	- Cognito // User pools vs identity pools // Security Token Service // Web Identity Provider
