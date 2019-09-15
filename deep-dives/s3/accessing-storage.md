@@ -33,46 +33,48 @@
 * Buckets and objects have two types of URLs
 	- Path-style URL
 		- specify region specific endpoint, bucket name and object key name
-			- e.g. http://s3-eu-west-1.amazonaws.com/mybucket/image01.jpg
+			- e.g. `http://s3-eu-west-1.amazonaws.com/mybucket/image01.jpg`
 		- EXCEPTION: if your bucket is in US-EAST (N. Virginia), then use:
-			- e.g. http://s3.amazonaws.com/mybucket/image01.jpg
+			- e.g. `http://s3.amazonaws.com/mybucket/image01.jpg`
+		- NOTE:  Path-style URLs are being deprecated starting September 2020
+			- See: [Amazon S3 Path Deprecation Plan – The Rest of the Story](https://aws.amazon.com/blogs/aws/amazon-s3-path-deprecation-plan-the-rest-of-the-story/)
 	- Virtual-hosted-style URL
-		- e.g. http://bucketname.s3.amazonaws.com/object_key
+		- e.g. `http://bucketname.s3.amazonaws.com/object_key`
 
 
 ## Operations on Objects
 
 * PUT
-	- used to write an object to a bucket
+	- Used to write an object to a bucket
 	- Single operation
-		- upload or copy objects up to 5GB in single PUT
+		- Upload or copy objects up to 5GB in single PUT
 	- Multiple operations (multipart uploads)
-		- for objects up to 5TB, you must use multipart upload API
-		- tip: you should consider using multipart upload for objects larger than 100MB
-		- all parts kept on server until complete or aborted
-			- so make sure you complete or abort each upload otherwise you will be charged
-			- you can use lifecycle rules to clean up multipart uploads
-				- enable "Clean up incomplete multipart uploads" in lifecycle settings
+		- For objects up to 5TB, you must use multipart upload API
+		- Tip: you should consider using multipart upload for objects larger than 100MB
+		- All parts kept on server until complete or aborted
+			- So make sure you complete or abort each upload otherwise you will be charged
+			- You can use lifecycle rules to clean up multipart uploads
+				- Enable "Clean up incomplete multipart uploads" in lifecycle settings
 * COPY
-	- create copies of object
-	- rename objects by creating copy and deleting original
-	- move objects to different location
-	- update object metadata
+	- Create copies of object
+	- Rename objects by creating copy and deleting original
+	- Move objects to different location
+	- Update object metadata
 * GET
-	- you retrieve whole object at once or in parts
-	- use "Range" HTTP header to specify the range of bytes needed
+	- You retrieve whole object at once or in parts
+	- Use "Range" HTTP header to specify the range of bytes needed
 * DELETE
-	- you can delete single or multiple objects in a single DELETE
-	- behavior depends upon whether versioning is enabled
-	- bucket does not have versioning enabled
+	- You can delete single or multiple objects in a single DELETE
+	- Behavior depends upon whether versioning is enabled
+	- If bucket does not have versioning enabled:
 		- DELETE permanently removes the object, making it unrecoverable
-	- bucket has versioning enabled
-		- you can either permanently delete object or delete marker
-		- if DELETE specifies key name only:
+	- If bucket has versioning enabled:
+		- You can either permanently delete object or delete marker
+		- If DELETE specifies key name only:
 			- S3 inserts delete marker
 			- you can recover object by removing delete marker
-		- to permanently delete individual versions, invoke DELETE with key name and version ID
-		- to completely remove object from bucket, ALL individual versions must be deleted
+		- To permanently delete individual versions, invoke DELETE with key name and version ID
+		- To completely remove object from bucket, ALL individual versions must be deleted
 
 
 ## Listing Object Keys

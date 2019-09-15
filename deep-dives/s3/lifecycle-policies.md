@@ -1,4 +1,4 @@
-## S3 Lifecycle Policies
+# S3 Lifecycle Policies
 
 ## Storage Class Hierarchy
 

@@ -69,7 +69,7 @@
 * Not replicated:
 	- Delete markers
 	- Lifecycle actions
-	- Objects in source bucket before replicatiojn enabled
+	- Objects in source bucket before replication enabled
 	- Objects with SSE-C
 	- Objects in source bucket that already have been replicated
 - Requirements:

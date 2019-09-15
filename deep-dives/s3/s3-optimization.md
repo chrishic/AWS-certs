@@ -1,6 +1,5 @@
 # Optimizing Performance in S3
 
-
 ## Best Practices - Performance
 
 * For faster uploads over long distances, use Transfer Acceleration
