@@ -7,8 +7,8 @@
 - [Storage Gateway](#storage-gateway)
 - [Types of Gateways](#types-of-gateways)
 	- [File Gateway](#file-gateway)
-	- [Cached-volume Gateway](#cached--volume-gateway)
-	- [Stored-volume Gateway](#stored--volume-gateway)
+	- [Volume Gateway Cached Mode](#volume-gateway-cached-mode)
+	- [Volume Gateway Stored Mode](#volume-gateway-stored-mode)
 	- [Tape Gateway](#tape-gateway)
 
 <!-- /MarkdownTOC -->
@@ -17,39 +17,51 @@
 
 ## Storage Gateway
 
-* Delivered as a virtual machine
-* Can be deployed on-premise or as EC2 instance
+* Delivered as VM
+	- Can be deployed on-premise with VMWare or Hyper-V or via hardware appliance
+* Provides local storage resources backed by S3 and Glacier
+* Often used in DR preparedness to sync to AWS
+* Useful in cloud migrations
+	- can be used in lazy manner to move data from on-prem to AWS
 * Can be used with Direct Connect
 * Can implement bandwidth throttling
-* can schedule snapshots
-* In transit encryption: All traffic is encrypted via SSL/TLS
-* At rest encryption: All data encrypted in S3 via AES-256
+* Can schedule snapshots
+* Encryption support
+	- In transit: All traffic is encrypted via SSL/TLS
+	- At rest: All data encrypted in S3 via AES-256
 
 
 ## Types of Gateways
 
 ### File Gateway
+
 * File interface
 	- NFS/CIFS access to S3/Glacier
 * Provides a virtual file server, exposing S3 objects via standard file system calls
-	- S3 buckets are available as NFS mounts
+	- S3 buckets are available as NFS/CIFS mounts
 * Unlimited storage
 
-### Cached-volume Gateway
+### Volume Gateway Cached Mode
+
+* Formerly known as "Cached-volume Gateway"
 * iSCSI based block storage
 * Only "hot" data stays local, the remainder goes to S3, uses EBS snapshots
 * Each volume up to 32TB 
 	- 32 volumes supported
 
-### Stored-volume Gateway
+### Volume Gateway Stored Mode
+
+* Formerly known as "Stored-volume Gateway"
 * iSCSI based block storage
-* All data on the local volume, and point-in-time snapshots go to S3
+* All data stored on the local volume, and point-in-time snapshots go to S3
 	- Snapshots are stored as EBS snapshots in S3
 * Each volume up to 16TB 
 	- 32 volumes supported
 
 ### Tape Gateway
-* iSCSI VTL interface, stored in S3 and archived to Glacier
+
+* Virtual media changer and tape library for use with existing backup software
+* iSCSI VTL interface
 * Virtual tape library
 	- library sits on S3
 	- 1500 virtual tapes
