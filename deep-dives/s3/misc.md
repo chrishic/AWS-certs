@@ -71,10 +71,10 @@
 		- available in all regions 
 		- 80TB
 	2. Snowball Edge 
-		- storage + compute
+		- storage + compute (Lambda)
 		- 100TB
 	3. Snowmobile 
-		- semi-truck of storage capacity
+		- semi-truck of storage capacity, up to 100PB
 
 
 ## S3 Batch Operations

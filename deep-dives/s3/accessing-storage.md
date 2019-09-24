@@ -40,6 +40,9 @@
 			- See: [Amazon S3 Path Deprecation Plan – The Rest of the Story](https://aws.amazon.com/blogs/aws/amazon-s3-path-deprecation-plan-the-rest-of-the-story/)
 	- Virtual-hosted-style URL
 		- e.g. `http://bucketname.s3.amazonaws.com/object_key`
+* Tip: to explore a public S3 bucket via browser use the URL:
+	- https://<bucket-name>.s3.amazonaws.com/index.html
+		- e.g. https://openaq-fetches.s3.amazonaws.com/index.html
 
 
 ## Operations on Objects
