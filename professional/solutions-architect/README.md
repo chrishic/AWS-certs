@@ -32,12 +32,12 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 * Take the [AWS training courses](#aws-training-courses) listed below 
 * [A Cloud Guru preparation course](https://acloud.guru/learn/aws-certified-solutions-architect-professional-2019)
 * [Linux Academy preparation course](https://linuxacademy.com/course/aws-certified-solutions-architect-professional-2018/)
-* Review the following deep dives
+* Review the following deep dives:
 	- [Well Architected Framework deep dive](../../deep-dives/well-architected-framework/)
 	- [AWS Encryption deep dive](../../deep-dives/encryption/)
 	- [Amazon Simple Storage Service (S3) Deep Dive](../../deep-dives/s3/)
+	- [VPC Networking Deep Dive](../../deep-dives/networking/)
 * Review [whitepapers](#whitepapers)
-	- With "Storage Options in the AWS Cloud, October 2013" whitepaper, pay attention to the "Anti-patterns" sections for each option
 * Review FAQs
 * Take the "AWS Certified Solutions Architect – Professional" practice exam
 	- If you get a passing score, you are ready for the actual exam
@@ -66,11 +66,6 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 		- Warm standby
 		- Understand what each offers in terms of RTO, RPO
 	- Understand difference between HA and fault tolerant
-* Cloud migration
-	- Make sure you understand the difference between:
-		- re-host
-		- re-platform
-		- re-architect
 
 
 ## Domains
@@ -246,101 +241,7 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 	- Enforce MFA delete on S3 bucket
 
 
-### Migration Planning
-
-* Focus areas:
-	- Existing workloads and processes for potential migration to the cloud
-	- Migration tools or services for new and migrated solutions based on detailed AWS knowledge
-	- Strategies for migrating existing on-premises workloads to the cloud
-	- New cloud architectures for existing solutions
-* The 6 R's of migration:
-	1. Retain: keep as-is
-	2. Re-host: lift and shift
-	3. Refactor: re-architect
-	4. Re-platform: life and shift with some tinkering
-	5. Replace
-	6. Retire
-* Application migration process
-	- Plan
-		- Discover
-			- Assessment and profiling
-			- Data requirements and classification
-			- Prioritization
-			- Business logic and infrastructure dependencies
-		- Design
-			- Detailed migration plan
-			- Estimate effort
-			- Security and risk assessment
-	- Build
-		- Transform
-			- Network topology
-			- Migrate
-			- Deploy
-			- Validate
-		- Transition
-			- Pilot testing
-			- Transition to support
-			- Release management
-			- Cutover and decommission
-	- Run
-		- Operate
-			- Staff training
-			- Monitoring
-			- Incident management
-			- Provisioning
-		- Optimize
-			- Monitoring-driven optimization
-			- CI/CD
-			- Well Architected framework
-* Migration tools for assistance
-	- Migration Hub:
-		- Application Discovery Service
-		- Database Migration Service
-		- Server Migration Service
-			- automates migration of your on-premises VM servers
-				- VMware vSphere
-					- Requires vCenter
-				- Microsoft Hyper-V/SCVMM
-				- Azure VMs
-			- SMS incrementally replicates your server VMs as AMIs ready for deployment on Amazon EC2
-			- Getting started:
-				- You need to install the Server Migration Connector to your on-prem environment
-					- the connector is what copies VM snapshots from on-prem to AWS cloud
-	- [AWS Management Portal for vCenter Server](https://aws.amazon.com/ec2/vcenter-portal/)
-		- Portal installs as a vCenter Server plug-in within your existing vCenter Server environment
-		- It enables you to migrate VMware VMs to Amazon EC2 and manage AWS resources from within vCenter Server
-		- IMPORTANT:  AWS recommends using AWS Server Migration Service to migrate VMs from a vCenter environment
-			- SMS automates the migration by replicating on-premises VMs incrementally and converting them to AMIs
-			- You can continue using your on-premises VMs while migration is in progress
-			- You should only use AWS Management Portal for vCenter Server if you want to manage EC2 resources from within vSphere Client
-	- VMWare Cloud on AWS
-		- [VMware Cloud on AWS](https://cloud.vmware.com/vmc-aws)
-		- [VMware Cloud on AWS - Overview](https://youtu.be/wibLL71pOBk)
-* AWS Storage Portfolio
-	- Block
-		- EBS
-		- Ephemeral storage
-	- File
-		- EFS
-	- Object
-		- S3
-		- Glacier
-	- Data transfer
-		- Snowball
-		- Storage Gateway
-		- Direct Connect (DX)
-		- Kinesis
-* Data migration
-	- Consider downtime/orchestration
-		- The more downtime you are allowed, the simpler/cheaper the migration can be
-	- Methods:
-		- image backup/restore
-		- file copy
-		- replication
-* Hybrid cloud architectures and connectivity
-	- Internet
-	- Direct Connect (DX)
-	- VPN	
+### [Migration Planning](./migrations.md)
 
 
 ### Cost Control
@@ -555,6 +456,9 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 * Whizlabs
 	- Practice exams, 400 questions, $30
 	- [AWS Certified Solutions Architect Professional](https://www.whizlabs.com/aws-solutions-architect-professional/)
+* Tutorials Dojo 
+	- Practice exams, 300 questions, $15 (Udemy course)
+	- [CSA-Pro Practice Exam Questions](https://www.udemy.com/aws-solutions-architect-professional-practice-exams-2018/?couponCode=COURSEPAGE-CSAP)
 
 
 ## Whitepapers
@@ -564,9 +468,11 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 * [Microservices on AWS](https://docs.aws.amazon.com/whitepapers/latest/microservices-on-aws/introduction.html)
 * [Using Amazon Web Services for Disaster Recovery, October 2014](https://d1.awsstatic.com/whitepapers/aws-disaster-recovery.pdf)
 * [An Overview of AWS Cloud Data Migration Services, May 2016](https://d1.awsstatic.com/whitepapers/Storage/An_Overview_of_AWS_Cloud_Data_Migration_Services.pdf)
-* [Storage Options in the AWS Cloud, October 2013](https://d1.awsstatic.com/whitepapers/Storage/aws-storage-options.pdf)
-	- Pay attention to the "Anti-patterns" sections for each option
+* [Storage Options in the Cloud](https://d1.awsstatic.com/whitepapers/Storage/AWS%20Storage%20Services%20Whitepaper-v9.pdf)
+* [Performance at Scale with Amazon ElastiCache](https://d0.awsstatic.com/whitepapers/performance-at-scale-with-amazon-elasticache.pdf)
 * [Practicing Continuous Integration and Continuous Delivery on AWS, June 2017](https://d1.awsstatic.com/whitepapers/DevOps/practicing-continuous-integration-continuous-delivery-on-AWS.pdf)
+* [Amazon Virtual Private Cloud Connectivity Options](https://d0.awsstatic.com/whitepapers/aws-amazon-vpc-connectivity-options.pdf)
+* [Overview of AWS Security - Network Security](https://d1.awsstatic.com/whitepapers/Security/Networking_Security_Whitepaper.pdf)
 
 
 ## AWS Training Courses
@@ -581,10 +487,18 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 ## re:Invent Videos
 * [AWS re:Invent 2016: Amazon Global Network Overview with James Hamilton](https://www.youtube.com/watch?v=uj7Ting6Ckk)
 * [AWS re:Invent 2017: Networking Many VPCs: Transit and Shared Architectures (NET404)](https://www.youtube.com/watch?v=KGKrVO9xlqI)
+* [AWS re:Invent 2017: Another Day, Another Billion Flows](https://www.youtube.com/watch?v=8gc2DgBqo9U)
 * [AWS re:Invent 2017: Deep Dive: AWS Direct Connect and VPNs](https://youtu.be/eNxPhHTN8gY)
 * [AWS re:Invent 2017: Deep Dive on AWS CloudFormation](https://youtu.be/01hy48R9Kr8)
+* [AWS re:Invent 2017: ElastiCache Deep Dive: Best Practices and Usage Patterns](https://www.youtube.com/watch?v=_YYBdsuUq2M)
+* [AWS re:Invent 2017: Deep Dive: Using Hybrid Storage with AWS Storage Gateway](https://www.youtube.com/watch?v=9wgaV70FeaM)
+* [AWS re:Invent 2017: Security Anti-Patterns: Mistakes to Avoid](https://www.youtube.com/watch?v=tzJmE_Jlas0)
+* [AWS re:Invent 2017: Best Practices for Managing Security Operations on AWS](https://www.youtube.com/watch?v=gjrcoK8T3To)
+* [AWS re:Invent 2017: IAM Policy Ninja](https://www.youtube.com/watch?v=aISWoPf_XNE)
+* [AWS re:Inforce 2019: Managing Multi-Account AWS Environments Using AWS Organizations](https://www.youtube.com/watch?v=fxo67UeeN1A)
 * [AWS re:Invent 2018: Aurora Serverless: Scalable, Cost-Effective Application Deployment](https://www.youtube.com/watch?v=4DqNk7ZTYjA)
 * [AWS re:Invent 2015: A Technical Introduction to Amazon EMR](https://youtu.be/WnFYoiRqEHw)
+
 
 ## Other Resources
 * [Self Paced Labs](http://aws.amazon.com/training/self-paced-labs)
@@ -595,3 +509,4 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 * [Best Practices for Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_BestPractices.html)
 * [Managed PostgreSQL Databases on AWS](https://youtu.be/hdQ-geGBsq4)
 * [Solution Architect Pro - Learning Path](http://jayendrapatil.com/aws-certified-solution-architect-professional-exam-learning-path/)
+* [Tutorials Dojo - AWS Cheat Sheets](https://tutorialsdojo.com/aws-cheat-sheets/)

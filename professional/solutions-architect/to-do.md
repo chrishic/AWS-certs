@@ -65,6 +65,8 @@
 * CloudFront
 	- CloudFront Trusted Signer
 	- CloudFront-signed URL
+	- CloudFront Signed URLs
+	- CloudFront Signed Cookies
 * Code*
 	- CodeCommit
 	- CodeBuild
@@ -106,3 +108,18 @@
 	- Big data platform allowing teams to process vast amounts of data quickly, and cost-effectively at scale
 		- Uses open source tools such as: Apache Spark, Apache Hive, Apache HBase, Apache Flink, and Presto
 	- [Understanding Master, Core, and Task Nodes](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-master-core-task-nodes.html)
+* AWS Organizations
+	- Service Control Policies
+		- How to prevent disabling CloudTrail logging across all accounts under the Organization
+* API Gateway
+	- Method Request/Response vs Integration Request/Response
+	- See: [Handle Lambda Errors in API Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/handle-errors-in-lambda-integration.html)
+* Cognito
+	- User Pools, Identity Pools, federation of users
+	- See: [Getting Started with Amazon Cognito Identity Pools (Federated Identities)](https://docs.aws.amazon.com/cognito/latest/developerguide/getting-started-with-identity-pools.html)
+* EBS
+	- Data Lifecycle Manager
+		- See: [Automating the Amazon EBS Snapshot Lifecycle](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-lifecycle.html)
+	- Minimum sizes, constraints on types that can be used for root volume
+		- See: [Requesting Modifications to Your EBS Volumes](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/requesting-ebs-volume-modifications.html#elastic-volumes-limitations)
+* AWS Glue
