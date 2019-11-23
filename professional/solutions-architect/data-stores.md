@@ -67,6 +67,15 @@
 * Data Lifecycle Manager
 	- schedule snapshots for volumes or instances every X hours
 	- provides retention rules to remove stale snapshots
+* EBS and RAID
+	- Types of RAID
+		- RAID0 (striping)
+		- RAID 1 (mirroring)
+		- RAID 5 (fault-tolerance via parity bits)
+			- 2 drives store data, 1 drive does parity bit
+			- can lose 1 drive and rebuild data
+			- writing parity bits can take up to 20-30% of IO
+	- NOTE: Because of performance overhead, AWS does *not* recommend RAID5
 * EC2 instance store
 	- when you stop/terminate instance, it goes away
 	- direct attached storage
@@ -111,56 +120,48 @@
 	- if entire region dies, you can use read replica
 		- 1. promote read-replica to stand-alone (single-AZ)
 		- 2. single_AZ reconfigured to multi-AZ
+* RDS Encryption
+    - RDS supports encryption at rest
+        - Applies to DB instances, automated backups, read replicas, snapshots
+    - Uses AES-256 encryption
+    - Uses KMS
+        - Master key is used to create encryption keys (i.e. envelope encryption)
+    - All logs, backups, and snapshots are encrypted
+    - Read replicas are encrypted using same key when both in same region
+    - You can only enable encryption when you create the DB instance
+    - You cannot modify an encrypted instance to disable encryption
+    - You cannot restore an unencrypted backup or snapshot to encrypted DB instance
+* RDS Snapshots
+    - Copying a snapshot
+        - You can copy automated or manual DB snapshots
+        - Post copy, you have a manual snapshot
+        - Possible copy destinations
+            - Copy snapshot within same region
+            - Copy snapshot across regions
+            - Copy snapshot across AWS accounts
+                - If automated snapshot, you first copy to make a manual snapshot
+                - Then manual snapshot can be copied to other account
+    - Snapshot retention
+        - Automated snapshots are deleted when:
+            - End of retention period
+            - When you disable automated snapshots for DB instance
+            - When DB instance is deleted
+        - Manual snapshots are retained until you specifically delete
+    - Encrypted snapshots
+        - If you copy an encrypted snapshot, the copy of the snapshot must also be encrypted
+        - Copying encrypted snapshots
+            - Within same region, just need access to KMS key
+            - Across regions, you must specify KMS key valid in destination region
+                - This is because KMS keys are region-specific
+        - You can encrypt copy of unencrypted snapshot
+            - Allows you to quickly add encryption to a previously unencrypted DB instance
+* HOWTO: Add encryption to an unencrypted DB instance
+    - First make snapshot of source DB instance
+    - Create copy of snapshot and specify encryption with KMS key
+    - Restore the encrypted snapshot to new instance 
 
 
-## DynamoDB
-
-* Managed, multi-AZ NoSQL data store with cross-region replication option
-* Defaults to eventual consistency reads but can request strongly consistent read via SDK parameter
-* Priced on throughput, rather than compute
-* Provision read and write capacity in anticipation of need
-* Autoscale capacity adjusts per configured min/max levels
-	- watches table for elevated requests (read/write), which triggers CW alarm
-- On-demand capacity for flexible capacity at small premium cost
-- Achieve ACID compliance with DynamoDB Transactions
-* Terminology
-	- Attribute: Name/value pair
-	- Item: the document (collection of attributes)
-	- Table: collection of items
-* Primary key
-	- Also known as partition key
-	- MUST be unique
-	- Can be either:
-		- partition key
-		- partition key + sort key
-* Secondary indexes
-	- Global secondary index (GSI)
-		- partition key and sort key can be different than from those on the table
-		- use when you want fast query of attributes outside of primary key
-	- Local secondary index (LSI)
-		- same partition key as the table but different sort key
-		- use when you know the partition key and want to quickly query on some other attribute
-	- max of 5 LSI and 5 GSI
-	- max 20 attributes across all indexes
-	- indexes take up storage space
-* Use cases for indexes
-	- Access just a few attributes the fastest way possible
-		- project those few attributes in global secondary index
-	- Frequently access some non-key attributes
-		- project those attributes in global secondary index
-	- Frequently access most non-key attributes
-		- project those attributes or entire table in global secondary index
-* Sparse indexes
-	- space is only taken up by items that contain that attribute
-* You can create table replicas via GSI
-	- Use case: better QOS for paying customers
-		- primary table for premium customers
-			- higher RCU/WCU limits
-		- GSI for free-tier customers
-			- lower RCU/WCU limits
-	- Use case: split RCU and WCU
-		- primary table for writes only - set high WCU
-		- GSI for reads only - set high RCU
+## [DynamoDB](../../deep-dives/dynamodb/)
 
 
 ## Redshift
@@ -170,6 +171,10 @@
 * Postgres compatible with JDBC/ODBC drivers
 	- compatible with most BI tools out of the box
 * Parallel processing and columnar data stores which are optimized for complex queries
+* Does not support multi-AZ deployments
+	- For best HA, use multi-node cluster with replication
+* Single node cluster does not support replication
+	- you have to restore from snapshot on S3 if drive fails
 * Option to query directly from data files on S3 via Redshift Spectrum
 * Data Lakes
 	- Store data in S3
@@ -195,12 +200,15 @@
 		- can scale out and scale in as demand changes
 		- need to run multiple CPU cores and threads
 		- you need to cache objects (like db queries)
+		- NOT HA
+		- Does *not* support backup/restore
 	- Redis
-		- you need encryption
+		- Supports encryption
 		- HIPAA compliance
-		- support for clustering
+		- Support for clustering for HA
+			- Automatic failover
+			- Replication
 		- complex data types
-		- HA (replication)
 		- pub/sub capability
 		- geospatial indexing
 		- backup and restore
@@ -242,7 +250,9 @@
 		- Kibana (analytics)
 		- Logstash (intake)
 		- Elasticsearch (search and storage)
-* Amazon WorkDocs
-	- Amazon's version of Dropbox
-		- can integrate with AD for SSO
-		- web, mobile and native clients (no Linux client)
+
+
+## Links
+
+* [Encrypting Amazon RDS Resources](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Encryption.html)
+* [Copying a Snapshot](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html)

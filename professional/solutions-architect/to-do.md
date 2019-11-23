@@ -1,24 +1,14 @@
 # To Do
 
-
 ## Action Items
 
 * Create study guides for the following AWS services:
 	- CloudWatch
 		- CloudWatch Events rule
-	- Systems Manager
-		- SSM agent installation
-		- Tools:
-			- RunCommand
-			- Session Manager
-			- State Manager
-			- Patch Manager
-			- Parameter Store for storing/retrieving secrets
 	- CloudFormation
-		- Mappings
-		- Conditions
-		- How do you test change sets in CloudFormation?
 	- VPC
+		- Virtual Private Gateway (AWS side)
+		- Customer Gateway (customer side)
 		- VPC endpoints
 		- Setup VPN between on-premises machines and AWS VPC
 		- VPC peering
@@ -48,7 +38,6 @@
 * Techniques to allow mobile users to make calls to DynamoDB
 	- Cognito // User pools vs identity pools // Security Token Service // Web Identity Provider
 * Architect a continuous integration and deployment process
-* Blue/green deployments
 * Understand cache population techniques
 	- Write-through
 	- Lazy loading	
@@ -56,6 +45,20 @@
 
 ## Items to Research
 
+* API Gateway
+	- Method Request/Response vs Integration Request/Response
+	- See: [Handle Lambda Errors in API Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/handle-errors-in-lambda-integration.html)
+* Cognito
+	- User Pools, Identity Pools, federation of users
+	- See: [Getting Started with Amazon Cognito Identity Pools (Federated Identities)](https://docs.aws.amazon.com/cognito/latest/developerguide/getting-started-with-identity-pools.html)
+* EC2
+	- Need to understand EC2 Placement Groups
+		- Spread, Cluster, Partition
+* EBS
+	- Data Lifecycle Manager
+		- See: [Automating the Amazon EBS Snapshot Lifecycle](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-lifecycle.html)
+	- Minimum sizes, constraints on types that can be used for root volume
+		- See: [Requesting Modifications to Your EBS Volumes](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/requesting-ebs-volume-modifications.html#elastic-volumes-limitations)
 * AWS Batch
 * CloudTrail 
 	- log file integrity validation
@@ -92,6 +95,9 @@
 		- Kibana
 			 - data visualization plugin for Elasticsearch
 			 - create bar, line and scatter plots, or pie charts and maps on top of large volumes of data
+* AWS Organizations
+	- Service Control Policies
+		- How to prevent disabling CloudTrail logging across all accounts under the Organization
 * [Amazon Athena](https://aws.amazon.com/athena/)
 	- interactive query service that makes it easy to analyze data in Amazon S3 using standard SQL
 	- serverless: you pay only for the queries that you run
@@ -104,22 +110,4 @@
 	- BI tool
 	- create and publish dashboards
 	- pay-per-session pricing
-* Understand how [Amazon EMR](https://aws.amazon.com/emr/) works
-	- Big data platform allowing teams to process vast amounts of data quickly, and cost-effectively at scale
-		- Uses open source tools such as: Apache Spark, Apache Hive, Apache HBase, Apache Flink, and Presto
-	- [Understanding Master, Core, and Task Nodes](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-master-core-task-nodes.html)
-* AWS Organizations
-	- Service Control Policies
-		- How to prevent disabling CloudTrail logging across all accounts under the Organization
-* API Gateway
-	- Method Request/Response vs Integration Request/Response
-	- See: [Handle Lambda Errors in API Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/handle-errors-in-lambda-integration.html)
-* Cognito
-	- User Pools, Identity Pools, federation of users
-	- See: [Getting Started with Amazon Cognito Identity Pools (Federated Identities)](https://docs.aws.amazon.com/cognito/latest/developerguide/getting-started-with-identity-pools.html)
-* EBS
-	- Data Lifecycle Manager
-		- See: [Automating the Amazon EBS Snapshot Lifecycle](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-lifecycle.html)
-	- Minimum sizes, constraints on types that can be used for root volume
-		- See: [Requesting Modifications to Your EBS Volumes](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/requesting-ebs-volume-modifications.html#elastic-volumes-limitations)
 * AWS Glue

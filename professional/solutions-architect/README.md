@@ -18,6 +18,7 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 	- [Improving Existing Architectures](#improving-existing-architectures)
 - [Test Preparation Services](#test-preparation-services)
 - [Whitepapers](#whitepapers)
+- [FAQs](#faqs)
 - [AWS Training Courses](#aws-training-courses)
 - [re:Invent Videos](#reinvent-videos)
 - [Other Resources](#other-resources)
@@ -38,8 +39,8 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 	- [Amazon Simple Storage Service (S3) Deep Dive](../../deep-dives/s3/)
 	- [VPC Networking Deep Dive](../../deep-dives/networking/)
 * Review [whitepapers](#whitepapers)
-* Review FAQs
-* Take the "AWS Certified Solutions Architect – Professional" practice exam
+* Review [FAQs](#faqs)
+* Take the official "AWS Certified Solutions Architect – Professional" practice exam
 	- If you get a passing score, you are ready for the actual exam
 
 
@@ -55,17 +56,6 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 * Pay attention to qualifying clauses
 	- e.g. "most cost effective" or "will best fulfill"
 * Eliminate obviously wrong answers to narrow the selection of possible right answers.
-
-
-## Important Concepts
-
-* Disaster recovery
-	- Understand RTO, RPO
-	- Understand the difference between each type and what each offers with respect to RTO/RPO
-		- Pilot light
-		- Warm standby
-		- Understand what each offers in terms of RTO, RPO
-	- Understand difference between HA and fault tolerant
 
 
 ## Domains
@@ -329,9 +319,31 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 			- Manual recovery -> High availability -> Fault tolerant
 		- Disaster Recovery spectrum
 			- Backup/recover -> Pilot light -> Warm standby -> Multi-site
+		- Understand RTO (recovery time objective), RPO (recovery point objective)
+		- Disaster recovery options
+			- Backup and Restore
+				- least expensive
+				- longest time to recover
+				- use S3 to quickly restore workloads to EC2/EBS
+			- Pilot Light
+				- have minimal resources ready to go
+				- can be quickly grown if need arises
+				- replication is typically the only running component
+			- Warm Standby
+				- all services up and ready to go (scaled down version of full environment)
+				- can be used as shadow environment
+			- Multi-Site
+				- ready all the time to take full production load
+				- effectively a mirrored data center
+				- fail over in seconds or less
+				- Understand difference between HA and fault tolerant
+		- Understand what each offers in terms of RTO, RPO
 	- Architect for AZ failure
 		- Use multi-AZ services
 			- e.g. S3, DynamoDB
+		- Be aware of single-AZ services
+			- Redshift does not support multi-AZ deployments
+				- For best HA, you must use multi-node cluster with replication
 		- Plan for capacity constraints
 		- Use Reserved Instances for critical systems
 		- Identify all AZ-specific services, noting which are regional/global
@@ -363,6 +375,7 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 		- ElastiCache
 			- Be aware of cache timeouts/TTLs
 			- Redis replication groups for HA
+				- Memcached is *not* HA
 			- Employ write-through cache for write spikes
 		- DynamoDB
 			- Alter read/write capacity units
@@ -414,6 +427,12 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 				- Central or distributed control
 				- IDS, IPS
 * 5.6. Improve the deployment of an existing solution
+	- Types of Deployments
+		- Rolling
+		- A/B deployments
+		- Canary deployments
+		- Blue/green deployments
+			- emphasize immutable infrastructure
 	- CloudFormation
 		- Setup, Configure
 			- Stack
@@ -443,7 +462,10 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 		- Undeploy, Shutdown
 			- remove an environment
 	- OpsWorks
-		- Hosted Chef
+		- Three flavors
+			- Hosted Chef
+			- Hosted Puppet
+			- Stacks (AWS-created using Chef Solo)
 
 
 ## Test Preparation Services
@@ -463,16 +485,22 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 
 ## Whitepapers
 * [Architecting for the Cloud - AWS Best Practices, October 2018](https://d1.awsstatic.com/whitepapers/AWS_Cloud_Best_Practices.pdf)
+* [Storage Options in the Cloud](https://d1.awsstatic.com/whitepapers/Storage/AWS%20Storage%20Services%20Whitepaper-v9.pdf)
+* [Backup and Recovery Approaches Using AWS](https://d1.awsstatic.com/whitepapers/Storage/Backup_and_Recovery_Approaches_Using_AWS.pdf)
+* [Microservices on AWS](https://docs.aws.amazon.com/whitepapers/latest/microservices-on-aws/introduction.html)
 * [Amazon Web Services: Overview of Security Processes whitepaper, May 2017](https://d1.awsstatic.com/whitepapers/Security/AWS_Security_Whitepaper.pdf)
 * [AWS Security Best Practices whitepaper, August 2016](https://d1.awsstatic.com/whitepapers/Security/AWS_Security_Best_Practices.pdf)
-* [Microservices on AWS](https://docs.aws.amazon.com/whitepapers/latest/microservices-on-aws/introduction.html)
-* [Using Amazon Web Services for Disaster Recovery, October 2014](https://d1.awsstatic.com/whitepapers/aws-disaster-recovery.pdf)
+* [Overview of AWS Security - Network Security](https://d1.awsstatic.com/whitepapers/Security/Networking_Security_Whitepaper.pdf)
 * [An Overview of AWS Cloud Data Migration Services, May 2016](https://d1.awsstatic.com/whitepapers/Storage/An_Overview_of_AWS_Cloud_Data_Migration_Services.pdf)
-* [Storage Options in the Cloud](https://d1.awsstatic.com/whitepapers/Storage/AWS%20Storage%20Services%20Whitepaper-v9.pdf)
-* [Performance at Scale with Amazon ElastiCache](https://d0.awsstatic.com/whitepapers/performance-at-scale-with-amazon-elasticache.pdf)
+* [Overview of Deployment Options on AWS](https://d1.awsstatic.com/whitepapers/overview-of-deployment-options-on-aws.pdf)
 * [Practicing Continuous Integration and Continuous Delivery on AWS, June 2017](https://d1.awsstatic.com/whitepapers/DevOps/practicing-continuous-integration-continuous-delivery-on-AWS.pdf)
 * [Amazon Virtual Private Cloud Connectivity Options](https://d0.awsstatic.com/whitepapers/aws-amazon-vpc-connectivity-options.pdf)
-* [Overview of AWS Security - Network Security](https://d1.awsstatic.com/whitepapers/Security/Networking_Security_Whitepaper.pdf)
+* [Getting Started with Amazon Aurora](https://d1.awsstatic.com/whitepapers/getting-started-with-amazon-aurora.pdf)
+* [Performance at Scale with Amazon ElastiCache](https://d0.awsstatic.com/whitepapers/performance-at-scale-with-amazon-elasticache.pdf)
+
+
+## FAQs
+* [Amazon Aurora FAQs](https://aws.amazon.com/rds/aurora/faqs/)
 
 
 ## AWS Training Courses
@@ -495,6 +523,8 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 * [AWS re:Invent 2017: Security Anti-Patterns: Mistakes to Avoid](https://www.youtube.com/watch?v=tzJmE_Jlas0)
 * [AWS re:Invent 2017: Best Practices for Managing Security Operations on AWS](https://www.youtube.com/watch?v=gjrcoK8T3To)
 * [AWS re:Invent 2017: IAM Policy Ninja](https://www.youtube.com/watch?v=aISWoPf_XNE)
+* [AWS re:Invent 2017: Scaling Up to Your First 10 Million Users](https://www.youtube.com/watch?v=w95murBkYmU)
+* [AWS re:Invent 2017: Elastic Load Balancing Deep Dive and Best Practices](https://www.youtube.com/watch?v=9TwkMMogojY)
 * [AWS re:Inforce 2019: Managing Multi-Account AWS Environments Using AWS Organizations](https://www.youtube.com/watch?v=fxo67UeeN1A)
 * [AWS re:Invent 2018: Aurora Serverless: Scalable, Cost-Effective Application Deployment](https://www.youtube.com/watch?v=4DqNk7ZTYjA)
 * [AWS re:Invent 2015: A Technical Introduction to Amazon EMR](https://youtu.be/WnFYoiRqEHw)
