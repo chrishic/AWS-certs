@@ -69,7 +69,7 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 		- Resource-based access controls
 		- IAM policies
 	- Cross account delegation
-		- Via Security Token Service (STS) to generate temporary access credentials
+		- Via Secure Token Service (STS) to generate temporary access credentials
 	- User federation
 		- Identity store is outside AWS
 		- Roles for federated users
@@ -139,14 +139,18 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 			- Unordered, at least once delivery
 		- FIFO queues
 	- SNS
+		- Fan out to SQS
 	- ElastiCache
 		- Redis
 			- persistent, auto failover with multi-AZ, can scale up but not down, scale with read replicas
 		- Memcached
 			- in-memory only
+			- can scale both up and out
+			- scales out using multiple nodes
 	- Kinesis
 		- Kinesis Streams
 			- Ordered within shard, async, "at least once" semantics
+			- Single direction only
 			- Custom processing per incoming record
 			- Sub-second processing latency
 		- Kinesis Firehose
@@ -154,6 +158,12 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 			- Processing latency of at least 60 seconds
 			- Ability to use existing analytics tools such as S3, Redshift
 		- Know difference between Data Streams and Data Firehose
+			- Streams
+				- Sub-second processing
+				- Custom processing per record
+			- Firehose
+				- Latency of 60 seconds or higher
+				- Zero admin
 	- CloudFormation
 		- Make sure you understand:
 			- Mappings
@@ -253,7 +263,7 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 		- Resource tags
 			- provide ability to organize and search within and across resources
 			- filterable and searchable
-			- do *not* appear in deatiled billing report
+			- do *not* appear in detailed billing report
 		- Cost allocation tags
 			- map AWS charges to organizational attributes for accounting purposes
 			- information presented in the detailed billing report and Cost Explorer (must be explicitly selected)
@@ -363,7 +373,7 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 			- GP2 for system disks
 			- SC1 for cold storage
 			- PIOPS for high performance random I/O
-			- ST1 for high performance sequential I/O
+			- ST1 for high performance sequential I/O (thruput)
 		- RDS
 			- Scale up instance size
 			- Increase storage size online
@@ -381,7 +391,7 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 			- Alter read/write capacity units
 			- Use global or local secondary indexes
 			- Use SQS for write spikes
-			- Write data in quiet periods
+				- Write data in quiet periods
 		- Loosely coupled architecture
 			- ELB, SQS, SNS, Kinesis, Auto Scaling
 * 5.5. Improve the security of an existing solution
@@ -484,11 +494,14 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 
 
 ## Whitepapers
+* [AWS Well-Architected Framework, July 2019](https://d1.awsstatic.com/whitepapers/architecture/AWS_Well-Architected_Framework.pdf)
 * [Architecting for the Cloud - AWS Best Practices, October 2018](https://d1.awsstatic.com/whitepapers/AWS_Cloud_Best_Practices.pdf)
+* [Microservices on AWS](https://docs.aws.amazon.com/whitepapers/latest/microservices-on-aws/introduction.html)
+* [Amazon Web Services: Overview of Security Processes whitepaper, March 2020]()
+https://d1.awsstatic.com/whitepapers/Security/AWS_Security_Whitepaper.pdf
+* [Using Amazon Web Services for Disaster Recovery, October 2014](https://d1.awsstatic.com/whitepapers/aws-disaster-recovery.pdf)
 * [Storage Options in the Cloud](https://d1.awsstatic.com/whitepapers/Storage/AWS%20Storage%20Services%20Whitepaper-v9.pdf)
 * [Backup and Recovery Approaches Using AWS](https://d1.awsstatic.com/whitepapers/Storage/Backup_and_Recovery_Approaches_Using_AWS.pdf)
-* [Microservices on AWS](https://docs.aws.amazon.com/whitepapers/latest/microservices-on-aws/introduction.html)
-* [Amazon Web Services: Overview of Security Processes whitepaper, May 2017](https://d1.awsstatic.com/whitepapers/Security/AWS_Security_Whitepaper.pdf)
 * [AWS Security Best Practices whitepaper, August 2016](https://d1.awsstatic.com/whitepapers/Security/AWS_Security_Best_Practices.pdf)
 * [Overview of AWS Security - Network Security](https://d1.awsstatic.com/whitepapers/Security/Networking_Security_Whitepaper.pdf)
 * [An Overview of AWS Cloud Data Migration Services, May 2016](https://d1.awsstatic.com/whitepapers/Storage/An_Overview_of_AWS_Cloud_Data_Migration_Services.pdf)

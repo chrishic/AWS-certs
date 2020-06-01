@@ -1,6 +1,5 @@
 # AWS Security
 
-
 ## AWS Shared Responsibility Model
 
 * Customer
@@ -83,6 +82,37 @@
 		- Can use SCP to prevent sub-accounts from changing logging settings
 	- Publishing Account Structure
 		- Common repository for AMIs, containers, code
+* AWS Organizations
+	- Centrally manage billing
+	- Control access, compliance, and security
+		- Implement Service Control Policy (SCP) permission guardrails
+		- Configure central logging of all actions performed across your organization using AWS CloudTrail and centrally aggregate data
+		- Use AWS Config to audit your environment for compliance
+	- Share resources across your AWS accounts
+	- API for creating new accounts
+	- Organizational units (OUs)
+		- logical grouping of accounts
+		- enable you to organize your accounts into a hierarchy
+		- make it easier for you to apply management controls
+	- OU best practices
+		- Create set of foundational OUs
+			- Infrastructure
+				- Used for shared infrastructure services such as networking and IT services
+				- Create accounts for each type of infrastructure service you require
+			- Security
+				- Used for security services
+				- Create accounts for logs, security read-only access, security tooling, etc
+	- Service Control Policy (SCP)
+		- Policy that defines the AWS service actions that accounts in your organization can perform
+		- Acts as permission guardrails
+		- Attach to:
+			- Root account - applies to all accounts in your organization)
+			- Individual OU - applies to all accounts in the OU including nested OUs
+			- Individual account
+		- Best practice:
+			- Configure CloudTrail logging to be enabled for all accounts under Organization
+			- All logs go to a single (locked-down) account
+			- Use SCP to prevent accounts from disabling CloudTrail logging
 
 
 ## Directory Services

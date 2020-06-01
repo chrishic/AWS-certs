@@ -212,6 +212,28 @@
 		- pub/sub capability
 		- geospatial indexing
 		- backup and restore
+* Caching Strategies
+    - Lazy Loading
+        - Loads data into the cache only on read misses
+            - App requests data from cache. 
+                - If hit, return data.
+                - If miss, fetch from database and then write results to cache
+        - Pros
+            - Only requested data is cached
+            - Tolerant to node failures (albeit with performance penalty of having empty cache)
+        - Cons
+            - Cache misses incur 3 requests (cache read, db read, cache write)
+            - Data can be stale
+    - Write-Through
+        - Adds/updates cache whenever data is written to the database
+        - Pros
+            - Data is never stale
+            - Writes incur 2 requests (cache write, db write)
+            - Cache misses incur 2 requests (cache read, db read)
+        - Cons
+            - Stores more data than necessary (most data won't be read)
+                - Can limit with TTLs
+            - With node failure, data won't be in cache until a write operation occurs
 
 
 ## Other Database Options

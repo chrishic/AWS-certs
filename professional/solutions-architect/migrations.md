@@ -139,7 +139,7 @@
 	- Ensure you have a comprehensive understanding of the entire AWS storage portfolio.
 		- Block
 			- EBS
-			- Ephemeral storage
+			- Ephemeral (EC2 instance) storage
 		- File
 			- EFS
 		- Object
