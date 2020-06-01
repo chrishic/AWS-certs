@@ -1,33 +1,44 @@
 ## DynamoDB
 
-* Managed, multi-AZ NoSQL data store with cross-region replication option
-* Defaults to eventual consistency reads but can request strongly consistent read via SDK parameter
+* Fully managed, multi-AZ NoSQL data store with cross-region replication option
+* Defaults to eventual consistency reads but can request strongly consistent read via API parameter
 * Priced on throughput, rather than compute
-* Provision read and write capacity in anticipation of need
-* Autoscale capacity adjusts per configured min/max levels
-	- watches table for elevated requests (read/write), which triggers CW alarm
-- On-demand capacity for flexible capacity at small premium cost
-- Achieve ACID compliance with DynamoDB Transactions
+* Achieve ACID compliance with DynamoDB Transactions
 * Terminology
 	- Attribute: Name/value pair
 	- Item: the document (collection of attributes)
 	- Table: collection of items
+		- Table names must be unique within each region
+			- Just like S3, Dynamo has public namespace
 * Primary key
-	- Also known as partition key
 	- MUST be unique
 	- Can be either:
 		- partition key
-		- partition key + sort key
+		- partition key + sort key (known as composite primary key)
 * Secondary indexes
 	- Global secondary index (GSI)
 		- partition key and sort key can be different than from those on the table
 		- use when you want fast query of attributes outside of primary key
+		- you can create GSIs at any time (at time of base table creation or anytime thereafter)
+		- only supports eventual consistency reads
+			- replication is asynchronous
+			  (cannot provide strong consistency)
+		- has its own capacity settings
+			- does not share with base table
+		- default limit of 20 GSI per table
+			- Can be increased upon request
 	- Local secondary index (LSI)
 		- same partition key as the table but different sort key
 		- use when you know the partition key and want to quickly query on some other attribute
-	- max of 5 LSI and 5 GSI
-	- max 20 attributes across all indexes
-	- indexes take up storage space
+		- you can only create LSIs when base table is created
+		- supports strongly or eventual consistency reads
+			- synchronous replication
+		- shares capacity units with base table
+		- limited to max of 5 LSI per table
+	- maximum limit of 100 attributes across all indexes
+		- Same attribute in multiple indexes counts for each occurrence
+	- Keep in mind: indexes take up storage space!
+		- You are duplicating data
 * Use cases for indexes
 	- Access just a few attributes the fastest way possible
 		- project those few attributes in global secondary index
@@ -46,8 +57,50 @@
 	- Use case: split RCU and WCU
 		- primary table for writes only - set high WCU
 		- GSI for reads only - set high RCU
-
-
+* Two types of read/write capacity modes
+	- Provisioned
+		- You provision read and write capacity in anticipation of need
+			- Good for when workload is predictable
+		- Read capacity units (RCU)
+			- (Strongly consistent) 1 read/sec for item up to 4KB
+			- (Eventually consistent) 2 read/sec for item up to 4KB
+			- Transactional reads require 2 RCU for 1 read/sec for each 4KB
+		- Write capacity units (WCU)
+			- 1 write/sec for item up to 1KB
+			- Transactional writes require 2 WCU for 1 write/sec for each 1KB
+		- Auto Scaling for DynamoDB
+			- Autoscale capacity adjusts per configured min/max levels
+				- Watches table for elevated requests (read/write), which triggers CloudWatch alarm
+			- Uses Target Tracking method to try to stay close to target utilization
+			- Currently does not scale down if table's consumption drops to zero
+				- Workarounds:
+					- Send requests to the table until it auto scales down
+					- Manually reduce the max capacity to be the same as minimum capacity
+			- Also supports Global Secondary Indexes
+				- Makes sense since GSI are essentially copies of the table
+	- On-Demand
+		- For flexible capacity at small premium cost
+		- Alternative to Auto Scaling
+		- Useful if you can't deal with scaling lag or truly have no idea of the anticipated capacity requirements
+		- Instantly allocates capacity as needed with no concept of provisioned capacity
+		- Costs more than traditional provisioning and auto scaling
+	- NOTE: if you go beyond provisioned capacity, you'll get an exception
+		- `ProvisionedThroughputExceededException`
+* Reading data
+	- Query
+		- Very efficient, uses indexes
+		- must provide partition key
+		- optionally can provide sort key
+	- Scan
+		- Reads entire table, with option to filter out results before sending
+		- Very expensive, slow
+* Using DynamoDB Streams
+	- Have stream trigger Lambda function
+	- Lambda trigger can do any of the following:
+		1. Update Elastic Search
+		2. Send change notification (SNS message)
+		3. Compute realtime aggregation and store results back in DynamoDB
+		4. Send data to Kinesis Firehose->S3(Parquet)->Athena pipeline for adhoc analytics
 
 
 # DynamoDB
@@ -75,9 +128,11 @@ Sort Key
 Partition Calculations
 
 By Capacity
-	- (Total RCU / 3000) + (Total WCU / 1000)
+	- When you exceed RCUs (3000) or WCUs (1000) limits for a single partition
+		- I.e. (Total RCU / 3000) + (Total WCU / 1000)
 By Size
-	- Total Size / 10 GB
+	- Every 10 GB of data
+		- I.e. Total Size / 10 GB
 Total Partitions
 	- Round up for the MAX(By Capacity, By Size)
 
@@ -87,20 +142,7 @@ Example:
 - by size = 10 / 10 = 1
 - total = ceil(max(2.66, 1)) = 3 partitions
 
-Auto Scaling for DynamoDB
-- Uses Target Tracking method to try to stay close to target utilization
-- Currently  does not scale down if table's consumption drops to zero
-	- Workarounds:
-		- Send requests to the table until it auto scales down
-		- Manually reduce the max capacity to be the same as minimum capacity
-- Also supports Global Secondary Indexes
-	- Makes sense since GSI are essentially copies of the table
-
-On-Demand Scaling for DynamoDB
-- Alternative to Auto Scaling
-- Useful if you can't deal with scaling lag or truly have no idea of the anticipated capacity requirements
-- Instantly allocates capacity as needed with no concept of provisioned capacity
-- Costs more than traditional provisioning and auto scaling
+When DynamoDB detects hot partition, it will split that partition
 
 DynamoDB Accelerator (DAX)
 - in-memory cache that sits in front of DynamoDB table
@@ -112,39 +154,31 @@ DynamoDB Accelerator (DAX)
 	- write-intensive apps that don't have many reads
 	- apps where you use client caching methods
 
+Data modeling best practices
+	- Typical apps
+		- In general, keep number of tables to a minimum
+		- For most apps, a single table is all you need
+	- Apps with time-series data
+		- Create one table per period, provisioned with required read/write capacity and indexes
+		- Before end of each period, prebuild table for next period
+			- As current period ends, direct traffic to new table
+			- As soon as table no longer being written to, reduce its write capacity
+			- Consider archiving or deleting tables as they age
+		- Primary goal
+			- Allocate required resources for current period that experiences highest volume of traffic
+			- Scale down provisioning for older tables
 
 
+## Links
 
-Use Amazon DynamoDB Local More Easily with the New Docker Image
-https://hub.docker.com/r/amazon/dynamodb-local/
-https://aws.amazon.com/about-aws/whats-new/2018/08/use-amazon-dynamodb-local-more-easily-with-the-new-docker-image
-https://aws.amazon.com/dynamodb/
-
-Setting Up DynamoDB Local (Downloadable Version)
-https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.html
-
-
-
-
-
-
-Best Practices for Handling Time-Series Data in DynamoDB
-https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-time-series.html
-
-
-General design principles in DynamoDB recommend that you keep the number of tables you use to a minimum. For most applications, a single table is all you need. However, for time-series data, you can often best handle it by using one table per application per period.
-
-
-The following design pattern often handles this kind of scenario effectively:
-
-Create one table per period, provisioned with the required read and write capacity and the required indexes.
-
-Before the end of each period, prebuild the table for the next period. Just as the current period ends, direct event traffic to the new table. You can assign names to these tables that specify the periods they have recorded.
-
-As soon as a table is no longer being written to, reduce its provisioned write capacity to a lower value (for example, 1 WCU) and provision whatever read capacity is appropriate. Reduce the provisioned read capacity of earlier tables as they age. You may choose to archive or delete the tables whose contents will rarely or never be needed.
-
-The idea is to allocate the required resources for the current period that will experience the highest volume of traffic and scale down provisioning for older tables that are not used actively, therefore saving costs.
-
-
-Managing Throughput Settings on Provisioned Tables
-https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughput.html
+* [AWS re:Invent 2019: [REPEAT 1] Amazon DynamoDB deep dive: Advanced design patterns (DAT403-R1)](https://www.youtube.com/watch?v=6yqfmXiZTlM)
+* [AWS re:Invent 2019: Data modeling with Amazon DynamoDB](https://www.youtube.com/watch?v=DIQVJqiSUkE)
+* [AWS re:Invent 2018: Amazon DynamoDB Deep Dive: Advanced Design Patterns for DynamoDB (DAT401)](https://www.youtube.com/watch?v=HaEPXoXVf2k)
+* [Build On DynamoDB | S1 E2 – Intro to NoSQL Data Modeling with Amazon DynamoDB](https://www.youtube.com/watch?v=Rmf8mrJ3X2s)
+* [How to model one-to-many relationships in DynamoDB](https://www.alexdebrie.com/posts/dynamodb-one-to-many/)
+* [DynamoDB Local](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DynamoDBLocal.html)
+* [NoSQL Workbench for Amazon DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/workbench.html)
+* [Best Practices for Handling Time-Series Data in DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-time-series.html)
+* [Managing Throughput Settings on Provisioned Tables](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughput.html)
+* [The Ten Rules for Data Modeling with DynamoDB](https://www.trek10.com/blog/the-ten-rules-for-data-modeling-with-dynamodb)
+* [The What, Why, and When of Single-Table Design with DynamoDB](https://www.alexdebrie.com/posts/dynamodb-single-table/)
