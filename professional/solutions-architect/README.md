@@ -18,7 +18,6 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 	- [Improving Existing Architectures](#improving-existing-architectures)
 - [Test Preparation Services](#test-preparation-services)
 - [Whitepapers](#whitepapers)
-- [FAQs](#faqs)
 - [AWS Training Courses](#aws-training-courses)
 - [re:Invent Videos](#reinvent-videos)
 - [Other Resources](#other-resources)
@@ -29,17 +28,29 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 ---
 
 ## Preparation Steps
+* Prepare for lots of studying
+	- Some people that have passed the exam report 350+ hours of preparation over a period of 3 months
+	- Make sure you have hands-on practice with labs and real-world experience
+	- Spend at least 30-40 hours taking practice exams
 * Review the [Exam Guide](https://d1.awsstatic.com/training-and-certification/docs-sa-pro/AWS_Certified_Solutions_Architect_Professional-Exam_Guide_EN_1.2.pdf) and [Sample Questions](https://d1.awsstatic.com/Train%20%26%20Cert/docs/AWS_certified_solutions_architect_professional_examsample.pdf)
 * Take the [AWS training courses](#aws-training-courses) listed below 
-* [A Cloud Guru preparation course](https://acloud.guru/learn/aws-certified-solutions-architect-professional-2019)
+* [A Cloud Guru preparation course](https://acloud.guru/learn/aws-certified-solutions-architect-professional)
+* [SA-Pro 2020 by Stephane Maarek](https://www.udemy.com/course/aws-solutions-architect-professional/)
 * [Linux Academy preparation course](https://linuxacademy.com/course/aws-certified-solutions-architect-professional-2018/)
 * Review the following deep dives:
 	- [Well Architected Framework deep dive](../../deep-dives/well-architected-framework/)
 	- [AWS Encryption deep dive](../../deep-dives/encryption/)
 	- [Amazon Simple Storage Service (S3) Deep Dive](../../deep-dives/s3/)
 	- [VPC Networking Deep Dive](../../deep-dives/networking/)
-* Review [whitepapers](#whitepapers)
-* Review [FAQs](#faqs)
+	- [DynamoDB Deep Dive](../../deep-dives/dynamodb/)
+* Review the [whitepapers](#whitepapers)
+* Review FAQs
+* Take practice exams with 3rd party providers
+	- Exam simulators
+		- A Cloud Guru exam simulator
+		- [Tutorials Dojo / Jon Bonso exam simulator](https://portal.tutorialsdojo.com)
+	- Other question banks
+		- [Whiz Labs SA-Pro practice questions](https://www.whizlabs.com/aws-solutions-architect-professional/)
 * Take the official "AWS Certified Solutions Architect – Professional" practice exam
 	- If you get a passing score, you are ready for the actual exam
 
@@ -480,25 +491,26 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 
 ## Test Preparation Services
 * A Cloud Guru
-	- $29/month
-	- [AWS Certified Solutions Architect – Professional](https://acloud.guru/learn/aws-certified-solutions-architect-professional-2019)
+	- $49/month
+	- [AWS Certified Solutions Architect – Professional](https://acloud.guru/learn/aws-certified-solutions-architect-professional)
 * Linux Academy
 	- $49/month
 	- [AWS Certified Solutions Architect – Professional](https://linuxacademy.com/course/aws-certified-solutions-architect-professional-2018/)
+* SA-Pro 2020 course by Stephane Maarek (Udemy course)
+	- [Ultimate AWS Certified Solutions Architect Professional 2020 - Stephane Maarek - Udemy](https://www.udemy.com/course/aws-solutions-architect-professional/)
 * Whizlabs
 	- Practice exams, 400 questions, $30
 	- [AWS Certified Solutions Architect Professional](https://www.whizlabs.com/aws-solutions-architect-professional/)
 * Tutorials Dojo 
 	- Practice exams, 300 questions, $15 (Udemy course)
-	- [CSA-Pro Practice Exam Questions](https://www.udemy.com/aws-solutions-architect-professional-practice-exams-2018/?couponCode=COURSEPAGE-CSAP)
+	- [AWS Certified Solutions Architect Professional Practice Exam - Jon Bonso / Tutorials Dojo](https://www.udemy.com/course/aws-solutions-architect-professional-practice-exams-amazon/)
 
 
 ## Whitepapers
 * [AWS Well-Architected Framework, July 2019](https://d1.awsstatic.com/whitepapers/architecture/AWS_Well-Architected_Framework.pdf)
 * [Architecting for the Cloud - AWS Best Practices, October 2018](https://d1.awsstatic.com/whitepapers/AWS_Cloud_Best_Practices.pdf)
 * [Microservices on AWS](https://docs.aws.amazon.com/whitepapers/latest/microservices-on-aws/introduction.html)
-* [Amazon Web Services: Overview of Security Processes whitepaper, March 2020]()
-https://d1.awsstatic.com/whitepapers/Security/AWS_Security_Whitepaper.pdf
+* [Amazon Web Services: Overview of Security Processes whitepaper, March 2020](https://d1.awsstatic.com/whitepapers/Security/AWS_Security_Whitepaper.pdf)
 * [Using Amazon Web Services for Disaster Recovery, October 2014](https://d1.awsstatic.com/whitepapers/aws-disaster-recovery.pdf)
 * [Storage Options in the Cloud](https://d1.awsstatic.com/whitepapers/Storage/AWS%20Storage%20Services%20Whitepaper-v9.pdf)
 * [Backup and Recovery Approaches Using AWS](https://d1.awsstatic.com/whitepapers/Storage/Backup_and_Recovery_Approaches_Using_AWS.pdf)
@@ -510,10 +522,6 @@ https://d1.awsstatic.com/whitepapers/Security/AWS_Security_Whitepaper.pdf
 * [Amazon Virtual Private Cloud Connectivity Options](https://d0.awsstatic.com/whitepapers/aws-amazon-vpc-connectivity-options.pdf)
 * [Getting Started with Amazon Aurora](https://d1.awsstatic.com/whitepapers/getting-started-with-amazon-aurora.pdf)
 * [Performance at Scale with Amazon ElastiCache](https://d0.awsstatic.com/whitepapers/performance-at-scale-with-amazon-elasticache.pdf)
-
-
-## FAQs
-* [Amazon Aurora FAQs](https://aws.amazon.com/rds/aurora/faqs/)
 
 
 ## AWS Training Courses
@@ -544,10 +552,10 @@ https://d1.awsstatic.com/whitepapers/Security/AWS_Security_Whitepaper.pdf
 
 
 ## Other Resources
-* [Self Paced Labs](http://aws.amazon.com/training/self-paced-labs)
-* [AWS Documentation for services](https://docs.aws.amazon.com/index.html)
 * [AWS Architecture Center](https://aws.amazon.com/architecture/)
 * [AWS Solutions](https://aws.amazon.com/solutions/)
+* [Self Paced Labs](http://aws.amazon.com/training/self-paced-labs)
+* [AWS Documentation for services](https://docs.aws.amazon.com/index.html)
 * [On-Demand AWS Tech Talks](https://aws.amazon.com/about-aws/events/monthlywebinarseries/on-demand/)
 * [Best Practices for Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_BestPractices.html)
 * [Managed PostgreSQL Databases on AWS](https://youtu.be/hdQ-geGBsq4)
