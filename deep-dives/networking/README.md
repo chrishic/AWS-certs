@@ -3,7 +3,7 @@
 ## General
 
 * Networking topics you should know thoroughly:
-	- physical layout of AZs and regions
+	- Physical layout of AZs and regions
 	- VPC concept and how to create
 	- Create public and private subnets
 	- What NAT is and what "disable source/destination checks" is for
@@ -105,6 +105,7 @@
 				- .2 = reserved for DNS
 				- .3 = reserved for future use
 				- .255 - broadcast address (unusable)
+				- * NOTE: Actual IP addresses will depend on CIDR range (first 4 addresses in CIDR range and last address are unusable)
     - Be careful! CIDR ranges cannot overlap between subnets (or between VPCs when peering)
 * Physical to logical assignment of AZs is done at the account level
 	- i.e. what my account thinks is us-west-2a is perhaps what another account thinks is us-west-2c
@@ -123,6 +124,35 @@
 		- Autonomous System Number (ASN) - unique endpoint identifier
 		- Weighting is local to router and higher weight is preferred path for outbound traffic
 	
+
+## Instance Networking
+
+* AWS Enhanced Networking
+	- Generally used for HPC use cases
+	- Uses single root I/O virtualization (SR-IOV) to deliver higher perf than traditional virtualized network interfaces
+	- Might have to install driver if other than Amazon Linux AMI
+	- Two options (which one you can choose depends on the type of EC2 instance)
+		- Intel 82599 VF interface
+			- 10 Gbps
+		- Elastic Network Adapter
+			- 25 Gbps
+* EC2 Placement Groups
+	- Clustered
+		- Instances placed in low-latency group within a single AZ
+		- Use when you need low network latency and/or high network thruput
+		- Pros: Get most effectiveness from Enhanced Networking instances
+		- Cons: Finite capacity (think about launching all instances you need up front)
+	- Spread
+		- Instances spread across underlying hardware
+		- Use when you want to reduce risk of simultaneous failure if underlying hardware fails
+		- Pros: can span mulitple AZs
+		- Cons: Max of 7 instances per group per AZ
+	- Partition
+		- Instances are grouped into partitions and spread across racks
+		- Use when you want to reduce risk of correlated hardware failure for multi-instance workloads
+		- Pros: better for large distributed or replicated workloads than spread
+		- Cons: not supported for dedicated hosts
+
 
 ## VPC Internet Access
 
@@ -206,6 +236,7 @@
 		- AWS-provided network connectivity between two VPCs
 		- Uses AWS backbone without going over internet
 		- Does not support transitive peering
+			- i.e. if VPC A is peered to VPC B, and VPC B is peered to VPC C, then VPC A *cannot* talk to VPC C thru VPC B
 		- How to setup:
 			- VPC Peering request is made
 			- Accepter accepts request
@@ -273,20 +304,22 @@
 * NOTE: Load balancers consume IP addresses within a VPC subnet
 * Types of load balancers
 	- Application Load Balancer
-		- Layer 7
+		- Layer 7 (HTTP, HTTPS)
 		- Path or host-based routing
 		- Support for WebSockets
 		- Supports SNI
 		- Sticky sessions
 		- Handles TLS termination
 		- No static/Elastic IP
+			- Except through AWS Global Accelerator
 		- Supports user authentication
 	- Network Load Balancer
-		- Layer 4
+		- Layer 4 (TCP, UDP, TLS)
 		- Support for WebSockets
 		- Does allow static/Elastic IP
-		- Handles TLS termination (as of January 2019)
-		- No SNI
+		- Handles TLS termination (as of Jan 2019)
+		- SNI support (as of Sep 2019)
+		- Supports sticky sessions (as of Mar 2020)
 	- Classic Load Balancer
 		- Layer 4 / Layer 7
 		- Sticky sessions
