@@ -121,7 +121,7 @@
 * Start with VPN connection to AWS
 * As usage grows, start using Direct Connect
 	- But keep VPN as backup
-	- Transition from VPN to Direct Connect seamless via BGP
+	- Transition from VPN to Direct Connect seamlessly via BGP
 		- Configure both VPN and Direct Connect within the same BGP prefix
 	- From on-prem side, make sure DX path (instead of VPN) is always preferred, through BGP weighting or static routes
 

@@ -10,15 +10,19 @@
 	- Ephemeral
 		- Memcached, EC2 Instance Store
 * IOPS vs Throughput
-	- IOPS: how fast can you read/write to/from the device
+	- IOPS ("sports car"): how fast can you read/write to/from the device
 		- i.e. I/O operations per second
-	- Throughput: how much data can be moved
+	- Throughput ("dump truck"): how much data can be moved
 * Consistency Models
 	- ACID
 		- Atomicity
+			- Transactions are all or nothing
 		- Consistency
+			- Transactions must be valid (e.g. key constraints respected)
 		- Isolation
+			- Transactions can't interact with each other
 		- Durability
+			- Completed transaction must persist
 	- BASE
 		- Basically available: the system guarantees availability, in terms of the CAP theorem
 		- Soft state: the state of the system may change over time, even without input (due to eventual consistency model)
@@ -63,7 +67,7 @@
 	- migrate system to new AZ or region
 	- convert unencrypted to encrypted volume
 		- take snapshot of unencrypted volume
-		- restore snapshot to new volume, chooisng to enable encryption
+		- restore snapshot to new volume, choosing to enable encryption
 * Data Lifecycle Manager
 	- schedule snapshots for volumes or instances every X hours
 	- provides retention rules to remove stale snapshots
