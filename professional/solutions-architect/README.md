@@ -18,6 +18,7 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 	- [Improving Existing Architectures](#improving-existing-architectures)
 - [Test Preparation Services](#test-preparation-services)
 - [Whitepapers](#whitepapers)
+- [FAQs](#faqs)
 - [AWS Training Courses](#aws-training-courses)
 - [re:Invent Videos](#reinvent-videos)
 - [Other Resources](#other-resources)
@@ -509,20 +510,30 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 ## Whitepapers
 * [AWS Well-Architected Framework, July 2019](https://d1.awsstatic.com/whitepapers/architecture/AWS_Well-Architected_Framework.pdf)
 * [Architecting for the Cloud - AWS Best Practices, October 2018](https://d1.awsstatic.com/whitepapers/AWS_Cloud_Best_Practices.pdf)
+* [Web Application Hosting in the AWS Cloud, September 2019](https://d0.awsstatic.com/whitepapers/aws-web-hosting-best-practices.pdf)
 * [Microservices on AWS](https://docs.aws.amazon.com/whitepapers/latest/microservices-on-aws/introduction.html)
 * [Amazon Web Services: Overview of Security Processes whitepaper, March 2020](https://d1.awsstatic.com/whitepapers/Security/AWS_Security_Whitepaper.pdf)
+* [Migrating AWS Resources to a New AWS Region](http://d0.awsstatic.com/whitepapers/aws-migrate-resources-to-new-region.pdf)
 * [Using Amazon Web Services for Disaster Recovery, October 2014](https://d1.awsstatic.com/whitepapers/aws-disaster-recovery.pdf)
 * [Storage Options in the Cloud](https://d1.awsstatic.com/whitepapers/Storage/AWS%20Storage%20Services%20Whitepaper-v9.pdf)
 * [Backup and Recovery Approaches Using AWS](https://d1.awsstatic.com/whitepapers/Storage/Backup_and_Recovery_Approaches_Using_AWS.pdf)
 * [AWS Security Best Practices whitepaper, August 2016](https://d1.awsstatic.com/whitepapers/Security/AWS_Security_Best_Practices.pdf)
 * [Overview of AWS Security - Network Security](https://d1.awsstatic.com/whitepapers/Security/Networking_Security_Whitepaper.pdf)
+* [Securing Data at Rest with Encryption, November 2013](https://d0.awsstatic.com/whitepapers/aws-securing-data-at-rest-with-encryption.pdf)
 * [An Overview of AWS Cloud Data Migration Services, May 2016](https://d1.awsstatic.com/whitepapers/Storage/An_Overview_of_AWS_Cloud_Data_Migration_Services.pdf)
-* [Overview of Deployment Options on AWS](https://d1.awsstatic.com/whitepapers/overview-of-deployment-options-on-aws.pdf)
+* [Overview of Deployment Options on AWS, June 2020](https://d1.awsstatic.com/whitepapers/overview-of-deployment-options-on-aws.pdf)
 * [Practicing Continuous Integration and Continuous Delivery on AWS, June 2017](https://d1.awsstatic.com/whitepapers/DevOps/practicing-continuous-integration-continuous-delivery-on-AWS.pdf)
 * [An Overview of the AWS Cloud Adoption Framework, Version 2 - February 2017](https://d1.awsstatic.com/whitepapers/aws_cloud_adoption_framework.pdf)
 * [Amazon Virtual Private Cloud Connectivity Options](https://d0.awsstatic.com/whitepapers/aws-amazon-vpc-connectivity-options.pdf)
 * [Getting Started with Amazon Aurora](https://d1.awsstatic.com/whitepapers/getting-started-with-amazon-aurora.pdf)
 * [Performance at Scale with Amazon ElastiCache](https://d0.awsstatic.com/whitepapers/performance-at-scale-with-amazon-elasticache.pdf)
+
+
+## FAQs
+* [AWS EC2 FAQs](https://aws.amazon.com/ec2/faqs/)
+* [AWS Auto Scaling FAQs](https://aws.amazon.com/autoscaling/faqs/)
+* [Elastic Load Balancing FAQs](https://aws.amazon.com/elasticloadbalancing/faqs/)
+* [AWS Elastic Beanstalk FAQs](https://aws.amazon.com/elasticbeanstalk/faqs/)
 
 
 ## AWS Training Courses
@@ -556,6 +567,7 @@ Study guide for [AWS Certified Solutions Architect - Professional](https://aws.a
 * [AWS Architecture Center](https://aws.amazon.com/architecture/)
 * [AWS Solutions](https://aws.amazon.com/solutions/)
 * [Self Paced Labs](http://aws.amazon.com/training/self-paced-labs)
+* [AWS Well-Architected Labs](https://wellarchitectedlabs.com)
 * [AWS Documentation for services](https://docs.aws.amazon.com/index.html)
 * [On-Demand AWS Tech Talks](https://aws.amazon.com/about-aws/events/monthlywebinarseries/on-demand/)
 * [Best Practices for Amazon RDS](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_BestPractices.html)
