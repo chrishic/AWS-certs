@@ -92,6 +92,7 @@
 * [AWS Well-Architected Framework - Online/HTML version](https://wa.aws.amazon.com/index.html)
 	- includes drill down pages for each review question, with recommended action items to address that issue
 * [AWS Well-Architected Tool](https://aws.amazon.com/well-architected-tool/)
+* [AWS Well-Architected Labs](https://wellarchitectedlabs.com)
 
 
 ## Whitepapers
